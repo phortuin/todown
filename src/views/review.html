@@ -1,0 +1,40 @@
+{% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
+
+{% block content %}
+	{{ header() }}
+	<form method="post" action="/review">
+	<input type="hidden" name="_method" value="PATCH">
+	<ul class="tasklist flat-list">
+	{% for task in tasks %}
+	<li data-task="{{ task.id }}">
+		{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}
+		<small>
+		<ul class="flat-list inline-list">
+			<li>
+				<input type="checkbox" name="{{ task.id }}__is_done" id="{{ task.id }}__is_done">
+				<label for="{{ task.id }}__is_done">Done ✓</label>
+			</li>
+			<li>
+				<input type="checkbox" name="{{ task.id }}__is_deleted" id="{{ task.id }}__is_deleted">
+				<label for="{{ task.id }}__is_deleted">Delete ✕</label>
+			</li>
+			<li>
+				<input type="checkbox" name="{{ task.id }}__is_starred" id="{{ task.id }}__is_starred" {% if task.is_starred %}checked disabled{% endif %}>
+				<label for="{{ task.id }}__is_starred">Star ★</label>
+			</li>
+			<li>
+				<input type="checkbox" name="{{ task.id }}__bump" id="{{ task.id }}__bump">
+				<label for="{{ task.id }}__bump">Bump (<span class="tnum">{{ task.bumps or 0}}</span>) ⇧</label>
+			<li>
+				<a href="/tasks/{{ task.id }}">Edit &rarr;</a>
+			</li>
+		</ul>
+		</small>
+		<hr>
+	</li>
+	{% endfor %}
+	</ul>
+	<button type="submit">Submit review</button>
+	</form>
+{% endblock %}

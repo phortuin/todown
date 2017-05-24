@@ -1,0 +1,18 @@
+{% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
+
+{% block content %}
+	{{ header() }}
+	<form method="post" action="/actionable">
+	<input type="hidden" name="_method" value="PATCH">
+	<ul class="tasklist flat-list">
+	{% for task in tasks %}
+	<li data-task="{{ task.id }}">
+		<!-- <a href="/tasks/{{ task.id }}">{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %} &rarr;</a><br> -->
+		<textarea name="{{ task.id }}__content">{% if task.content %}{{ task.content }}{% else %}(Untitled){% endif %}</textarea>
+	</li>
+	{% endfor %}
+	</ul>
+	<button type="submit">Submit actionables</button>
+	</form>
+{% endblock %}

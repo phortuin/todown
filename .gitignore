@@ -19,3 +19,6 @@ test/reports
 
 # static
 static
+
+# environment variables
+.env

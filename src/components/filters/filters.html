@@ -1,0 +1,14 @@
+{% macro filters() %}
+<div class="panel">
+	<form method="GET" action="/" name="form_filters">
+	<h2>Filters:</h2>
+	<ul class="flat-list inline-list">
+		<li>
+			<input onchange="document.form_filters.submit()" type="checkbox" id="show_all" name="show_all" {% if QS.show_all %}checked{% endif %}>
+			<label for="show_all">Show all.</label>
+		</li>
+	</ul>
+	<!-- <button type="submit" class="button">Filter</button> -->
+	</form>
+</div>
+{% endmacro %}
