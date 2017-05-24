@@ -2,6 +2,7 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
+<main role="main">
 	{{ header() }}
 	<form method="post" action="/actionable">
 	<input type="hidden" name="_method" value="PATCH">
@@ -15,4 +16,5 @@
 	</ul>
 	<button type="submit">Submit actionables</button>
 	</form>
+</main>
 {% endblock %}

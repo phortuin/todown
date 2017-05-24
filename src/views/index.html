@@ -3,6 +3,7 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
+<main role="main">
 	{{ header() }}
 	{{ filters() }}
 
@@ -40,4 +41,5 @@
 		</ul>
 		</form>
 	</div>
+</main>
 {% endblock %}

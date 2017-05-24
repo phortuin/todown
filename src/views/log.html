@@ -2,6 +2,7 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
+<main role="main">
 	{{ header() }}
 
 	<ul class="tasks flat-list">
@@ -11,5 +12,6 @@
 		<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}.</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
 	</li>
 	{% endfor %}
-</ul>
+	</ul>
+</main>
 {% endblock %}

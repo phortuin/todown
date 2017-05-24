@@ -2,6 +2,7 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
+<main role="main">
 {{ header() }}
 <article>
 	<div class="task__content">
@@ -59,4 +60,5 @@
 	</form>
 	</div>
 </article>
+</main>
 {% endblock %}
