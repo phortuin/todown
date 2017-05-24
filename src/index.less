@@ -14,6 +14,8 @@
 @margin-default: 1rem;
 @margin-half: @margin-default / 2;
 
+@z-index-high: 1;
+
 @s-only: ~'only screen and (max-width: 767px)';
 @m: ~'only screen and (min-width: 768px)';
 @l: ~'only screen and (min-width: 1281px)';
@@ -357,4 +359,32 @@ hr {
 
 .tnum {
 	font-feature-settings: "kern", "liga", "tnum";
+}
+
+.tasklist--review {
+	@media @m {
+		font-size: 1.5em;
+	}
+
+	& > li {
+		padding-top: 30vh;
+		display: block;
+		margin: 0 auto;
+		height: 100vh;
+
+		@media @m {
+			width: 60rem;
+		}
+	}
+}
+
+.fullscreen {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	button {
+		font-size: 2em;
+	}
 }

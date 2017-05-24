@@ -2,13 +2,14 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
-	{{ header() }}
+	<main role="main">
+		{{ header(sticky=true) }}
+	</main>
 	<form method="post" action="/review">
 	<input type="hidden" name="_method" value="PATCH">
-	<ul class="tasklist flat-list">
+	<ul class="tasklist tasklist--review flat-list" data-review>
 	{% for task in tasks %}
-	<li data-task="{{ task.id }}">
-		{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}
+	<li data-task="{{ task.id }}" id="{{ task.id }}">
 		<small>
 		<ul class="flat-list inline-list">
 			<li>
@@ -26,15 +27,22 @@
 			<li>
 				<input type="checkbox" name="{{ task.id }}__bump" id="{{ task.id }}__bump">
 				<label for="{{ task.id }}__bump">Bump (<span class="tnum">{{ task.bumps or 0}}</span>) ⇧</label>
+			</li>
 			<li>
 				<a href="/tasks/{{ task.id }}">Edit &rarr;</a>
 			</li>
+			<li>
+				<a href="#" data-skip>Skip &darr;</a>{# hyperlink should preferably directly click to next task, which should be a property on current task #}
+			</li>
 		</ul>
 		</small>
-		<hr>
+		<br/>
+		{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}
 	</li>
 	{% endfor %}
 	</ul>
-	<button type="submit">Submit review</button>
+	<div class="fullscreen">
+		<button id="submit" type="submit" class="button">Submit review</button>
+	</div>
 	</form>
 {% endblock %}
