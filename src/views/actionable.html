@@ -9,12 +9,13 @@
 	<ul class="tasklist flat-list">
 	{% for task in tasks %}
 	<li data-task="{{ task.id }}">
+		<a class="task-content__clear" href="javascript:return false;" onclick="document.getElementById('{{ task.id }}-content').value='';">clear</a>
 		<!-- <a href="/tasks/{{ task.id }}">{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %} &rarr;</a><br> -->
-		<textarea name="{{ task.id }}__content">{% if task.content %}{{ task.content }}{% else %}(Untitled){% endif %}</textarea>
+		<textarea id="{{ task.id }}-content" name="{{ task.id }}__content">{% if task.content %}{{ task.content }}{% else %}(Untitled){% endif %}</textarea>
 	</li>
 	{% endfor %}
 	</ul>
-	<button type="submit">Submit actionables</button>
+	<button class="button" type="submit">Submit actionables</button>
 	</form>
 </main>
 {% endblock %}
