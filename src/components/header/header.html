@@ -3,6 +3,7 @@
 	<nav class="header__nav">
 		<ul class="flat-list inline-list">
 			<li><a class="header__link {% if SITE.path === '/' %}header__link--is-active{% endif %}" href="/">To&nbsp;do</a></li>
+			<li><a class="header__link {% if SITE.path.indexOf('/search') > -1 %}header__link--is-active{% endif %}" href="/search">Search</a></li>
 			<li><a class="header__link {% if SITE.path === '/review' %}header__link--is-active{% endif %}" href="/review">Review</a></li>
 			<li><a class="header__link {% if SITE.path === '/actionable' %}header__link--is-active{% endif %}" href="/actionable">Actionablise</a></li>
 			<li><a class="header__link {% if SITE.path === '/log' %}header__link--is-active{% endif %}" href="/log">Log</a></li>

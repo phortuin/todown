@@ -9,6 +9,10 @@ const TaskSchema = new mongoose.Schema({
 	bumps: 0
 });
 
+// Add a text index on content, so we can search it
+// Source: https://stackoverflow.com/questions/28775051/best-way-to-perform-a-full-text-search-in-mongodb-and-mongoose
+TaskSchema.index({ content: 'text' });
+
 // Regex matches anything on line one but without optional pound marks (Markdown heading notation)
 // Group 2 is the match we're looking for.
 //

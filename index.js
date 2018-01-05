@@ -36,6 +36,7 @@ app.use('/log', require('./app/routes/log'));
 app.use('/maintenance', require('./app/routes/maintenance'));
 app.use('/review', require('./app/routes/review'));
 app.use('/actionable', require('./app/routes/actionable'));
+app.use('/search', require('./app/routes/search'));
 app.use('/tasks', require('./app/routes/tasks'));
 
 app.use(express.static('static/'));

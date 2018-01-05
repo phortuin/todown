@@ -1,0 +1,30 @@
+{% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
+
+{% block content %}
+<main role="main">
+	{{ header() }}
+	<form method="get" action="/search">
+		<input type="text" name="q" placeholder="Type a search query." {% if query %}value="{{ query }}"{% endif %}>
+		<button class="button">Search</button>
+	</form>
+
+	{% if tasks %}
+	<h1>Results for ‘{{ query }}’</h1>
+
+	<form method="post" action="/tasks">
+	<input type="hidden" name="_method" value="PATCH">
+	<ul class="tasks flat-list">
+		{% for task in tasks %}
+		<li data-task="{{ task.id }}" class="task {% if not task.is_actionable %}task--is-incomplete {% endif %}{% if task.is_done %}task--is-done {% endif %}{% if task.is_starred %}task--is-starred {% endif %}">
+			<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
+			<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}.</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
+		</li>
+		{% endfor %}
+	</ul>
+	<button type="submit" class="button" name="_action" value="done">Mark as done.</button>
+	<button type="submit" class="button button--secondary" name="_action" value="star" {% if starred_count >= 3 %}disabled{% endif %}>Have a star.</button>
+	</form>
+	{% endif %}
+</main>
+{% endblock %}
