@@ -5,7 +5,7 @@ const Task = require('../models/task')
 const renderer = require('../../lib/renderer');
 
 function show(req, res, next) {
-	Task.find({ is_done: {$ne: true}}).exec()
+	Task.find({ is_done: {$ne: true}, is_actionable: true}).exec()
 		.then(tasks => {
 			res.send(renderer.render('views/review.html', { tasks }));
 		}).catch(err => {
