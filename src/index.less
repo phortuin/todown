@@ -112,7 +112,7 @@ form {
 	width: 100%;
 }
 
-textarea {
+textarea, input[type=text] {
 	margin-bottom: @margin-half;
 	border: none;
 	width: 100%;
@@ -141,6 +141,10 @@ textarea {
 	&:focus {
 		outline: 2px solid @black;
 	}
+}
+
+input[type=text] {
+	height: 3.75rem;
 }
 
 .tasks {
@@ -186,6 +190,8 @@ textarea {
 
 .task__content {
 	padding: @margin-default 0;
+	overflow: auto;
+	max-height: 40vh;
 }
 
 .task__title {
@@ -387,4 +393,11 @@ hr {
 	button {
 		font-size: 2em;
 	}
+}
+
+.task-content__clear {
+	float: right;
+	margin-bottom: -2em;
+	margin-right: 0.5em;
+	position: relative;
 }

@@ -37,7 +37,13 @@
 		</ul>
 		</small>
 		<br/>
-		{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}
+		<div class="task__content">
+			{% if task.title === task.content %}
+			{% if task.title %}{{ task.title }}{% else %}(Untitled){% endif %}
+			{% else %}
+			{% if task.content %}{{ task.content | markdown | safe }}{% else %}(Untitled){% endif %}
+			{% endif %}
+		</div>
 	</li>
 	{% endfor %}
 	</ul>
