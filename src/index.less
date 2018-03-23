@@ -1,8 +1,33 @@
 @import (once) "components/button/button";
 @import (once) "components/header/header";
 
+
+
+@font-face {
+	font-family: 'LFT Etica';
+	src: url('LFTEtica-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LFT Etica';
+	src: url('LFTEtica-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LFT Etica';
+	src: url('LFTEtica-Italic.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
 @black: #231f20;
+@black-light: #776;
 @white: #fff;
+@white-almost: #f7f7f0;
 @yellow: #fbb829; // colourlovers heart of gold
 @yellow-bright: #fe3;
 @green: #a1c820;
@@ -10,6 +35,7 @@
 @red: #fe4365; // colourlovers sugar hearts you
 @blue: #4a49eb;
 @grey: #999;
+@grey-light: #ccb;
 
 @margin-default: 1rem;
 @margin-half: @margin-default / 2;
@@ -29,17 +55,17 @@ select,
 textarea,
 input,
 button {
-	font-family: "Rubik",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans",sans-serif;
+	font-family: "IBM Plex Sans","Rubik",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans",sans-serif;
 	line-height: 1.4;
 	-webkit-text-size-adjust: 100%;
-	font-feature-settings: "kern", "liga";
+	font-feature-settings: "kern", "liga", "ss01", "ss02"; //01 = open a, 02 = open g
 }
 
 body {
-	font-size: 100%;
+	font-size: 82.5%;
 
 	@media @l {
-		font-size: 125%;
+		font-size: 100%;
 	}
 }
 
@@ -106,6 +132,7 @@ p {
 
 a {
 	color: @blue;
+	text-decoration-skip-ink: none;
 }
 
 form {
@@ -120,7 +147,7 @@ textarea, input[type=text] {
 	padding: 0.75rem 1rem;
 	font-size: 1.25em;
 	resize: none;
-	outline: 2px solid #ddd;
+	outline: 2px solid @grey-light;
 	height: 10rem;
 
 	&.flexi {
@@ -396,8 +423,35 @@ hr {
 }
 
 .task-content__clear {
-	float: right;
-	margin-bottom: -2em;
-	margin-right: 0.5em;
 	position: relative;
+	display: block;
+	float: right;
+	right: @margin-default;
+	top: @margin-default * 2;
+	color: @grey;
+	visibility: hidden;
+
+	&:hover {
+		color: @blue;
+	}
+}
+
+li[data-task]:hover .task-content__clear {
+	visibility: visible;
+}
+
+.task-content__card {
+	background-color: @white-almost;
+	font-size: 1em;
+	color: @black-light;
+
+	&:focus {
+		background-color: @white;
+		color: @black;
+	}
+}
+
+a.searchlink {
+	color: @black;
+	text-decoration-style: dotted;
 }
