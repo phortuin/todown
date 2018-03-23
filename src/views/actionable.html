@@ -9,9 +9,9 @@
 	<ul class="tasklist flat-list">
 	{% for task in tasks %}
 	<li data-task="{{ task.id }}">
-		<a class="task-content__clear" href="javascript:return false;" onclick="document.getElementById('{{ task.id }}-content').value='';">clear</a>
+		<a class="task-content__clear" tabindex="-1" href="javascript:return false;" onclick="document.getElementById('{{ task.id }}-content').value='';">Clear task</a>
 		<!-- <a href="/tasks/{{ task.id }}">{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %} &rarr;</a><br> -->
-		<textarea id="{{ task.id }}-content" name="{{ task.id }}__content">{% if task.content %}{{ task.content }}{% else %}(Untitled){% endif %}</textarea>
+		<textarea class="task-content__card" id="{{ task.id }}-content" name="{{ task.id }}__content">{% if task.content %}{{ task.content }}{% else %}(Untitled){% endif %}</textarea>
 	</li>
 	{% endfor %}
 	</ul>
