@@ -2,7 +2,8 @@
 <header role="banner" class="header {% if sticky %}header--sticky{% endif %}">
 	<nav class="header__nav">
 		<ul class="flat-list inline-list">
-			<li><a class="header__link {% if SITE.path in ['/', '/tasks'] %}header__link--is-active{% endif %}" href="/">To&nbsp;do</a></li>
+			<li><a class="header__link {% if SITE.path in ['/', '/tasks'] %}header__link--is-active{% endif %}" href="/">Inbox</a></li>
+			<li><a class="header__link {% if SITE.path in ['/starred'] %}header__link--is-active{% endif %}" href="/starred">Starred</a></li>
 			<li><a class="header__link {% if SITE.path === '/review' %}header__link--is-active{% endif %}" href="/review">R<span class="m-and-up">eview</span></a></li>
 			<li><a class="header__link {% if SITE.path === '/actionable' %}header__link--is-active{% endif %}" href="/actionable">A<span class="m-and-up">ctionablise</span></a></li>
 			<li><a class="header__link {% if SITE.path.indexOf('/search') > -1 %}header__link--is-active{% endif %}" href="/search">Search</a></li>
