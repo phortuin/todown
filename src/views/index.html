@@ -14,12 +14,12 @@
 	{% for task in tasks %}
 	<li data-task="{{ task.id }}" class="task {% if not task.is_actionable %}task--is-incomplete {% endif %}{% if task.is_done %}task--is-done {% endif %}{% if task.is_starred %}task--is-starred {% endif %}">
 		<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
-		<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title }}{% else %}(Untitled){% endif %}.</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
+		<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title | titleize | linkize | safe }}{% else %}(Untitled){% endif %}</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
 	</li>
 	{% endfor %}
 	</ul>
 	<button type="submit" class="button" name="_action" value="done">Mark as done.</button>
-	<button type="submit" class="button button--secondary" name="_action" value="star" {% if starred_count >= 3 %}disabled{% endif %}>Have a star.</button>
+	<button type="submit" class="button button--secondary" name="_action" value="star">Have a star.</button>
 	</form>
 
 	<div class="add-item">
@@ -34,7 +34,7 @@
 					<label for="new_task_is_actionable">Actionable<span class="m-and-up"> fo sho</span>.</label>
 				</div>
 				<div>
-					<input type="checkbox" id="new_task_is_starred" name="is_starred" {% if starred_count >= 3 %}disabled{% endif %}>
+					<input type="checkbox" id="new_task_is_starred" name="is_starred">
 					<label for="new_task_is_starred">Star<span class="m-and-up"> that shit</span>.</label>
 				</div>
 			</li>
