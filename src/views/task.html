@@ -12,53 +12,10 @@
 		{% if task.content %}{{ task.content | markdown | safe }}{% else %}(Untitled){% endif %}
 		{% endif %}
 	</div>
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="PUT">
-		<textarea name="content">{{ task.content }}</textarea>
-		<div>
-			<input type="checkbox" name="is_actionable" id="{{ task.id }}_actionable" {% if task.is_actionable %}checked{% endif %}>
-			<label for="{{ task.id }}_actionable">Actionable</label>
-			<br><br>
-		</div>
-		<button type="submit" class="button">Save changes</button>
-	</form>
-	<div class="buttons">
-	{% if task.is_done %}
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="PUT">
-		<input type="hidden" name="is_done" value="false">
-		<button type="submit" class="button button--secondary">Set not done</button>
-	</form>
-	{% else %}
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="PUT">
-		<input type="hidden" name="is_done" value="true">
-		<button type="submit" class="button">Set done</button>
-	</form>
-	{% endif %}
-	{% if task.is_starred %}
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="PUT">
-		<input type="hidden" name="is_starred" value="false">
-		<button type="submit" class="button button--secondary">Set not starred</button>
-	</form>
-	{% else %}
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="PUT">
-		<input type="hidden" name="is_starred" value="true">
-		<button type="submit" class="button">Set starred</button>
-	</form>
-	{% endif %}
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="PUT">
-		<input type="hidden" name="reset_bumps" value="true">
-		<button type="submit" class="button button--secondary">Reset bumps ({{ task.bumps or 0 }})</button>
-	</form>
-	<form method="post" action="/tasks/{{ task.id }}">
-		<input type="hidden" name="_method" value="DELETE">
-		<button type="submit" class="button button--danger">Delete</button>
-	</form>
-	</div>
+	<p>
+		<br/>
+		<a href="/tasks/{{ task.id }}/edit" class="button button--secondary">Edit</a> or <a href="javascript:history.go(-1)">Go back</a>
+	</p>
 </article>
 </main>
 {% endblock %}
