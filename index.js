@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 		current_url: req.protocol + '://' + req.get('host') + req.originalUrl,
 		host: req.get('host'),
 		domain: req.protocol + '://' + req.get('host') + '/',
-		path: req.originalUrl
+		path: req.path
 	});
 	renderer.addGlobal('QS', req.query);
 	next();
@@ -38,6 +38,7 @@ app.use('/review', require('./app/routes/review'));
 app.use('/actionable', require('./app/routes/actionable'));
 app.use('/search', require('./app/routes/search'));
 app.use('/tasks', require('./app/routes/tasks'));
+app.use('/starred', require('./app/routes/starred'));
 
 app.use(express.static('static/'));
 
@@ -54,15 +55,15 @@ app.use((req, res, next) => res.status(404).send('404'));
 
 // $RUN
 console.log(`Connecting to MongoDB on ${process.env.DB_HOST}:${process.env.DB_PORT}...`);
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, err => {
-	if (err) {
-		console.error(err);
-		process.exit(1);
-	} else {
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
+	.then(() => {
 		app.listen(port, () => {
 			if (isDevelopment) {
 				console.log('Development server available on http://localhost:' + port);
 			}
 		});
-	}
-});
+	})
+	.catch(err => {
+		console.error(err);
+		// process.exit(1);
+	});
