@@ -1,9 +1,13 @@
 {% extends "views/_base.html" %}
 {% from "components/header/header.html" import header %}
+{% from "components/nav/nav.html" import nav %}
 
 {% block content %}
 <main role="main">
-	{{ header() }}
+	{{ header('🌳 Log') }}
+	{{ nav() }}
+
+	<section class="lists">
 
 	<ul class="tasks flat-list">
 	{% for task in tasks %}
@@ -13,5 +17,6 @@
 	</li>
 	{% endfor %}
 	</ul>
+</section>
 </main>
 {% endblock %}

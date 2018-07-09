@@ -1,0 +1,75 @@
+{% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
+{% from "components/nav/nav.html" import nav %}
+
+{% block content %}
+<main role="main">
+{{ header(title = '📚 Pages / ' + (page.parent.title + ' / ' if page.parent.title else '') + page.title, isPage = true, pageId = page.id) }}
+{{ nav() }}
+<section class="lists">
+<article>
+
+	<div class="page-cols">
+	<div class="page-cols-first">
+		<div class="task__content task__content--full">
+			{% if page.title === page.content %}
+			{% if page.title %}{{ page.title }}{% else %}(Untitled){% endif %}
+			{% else %}
+			{% if page.content %}{{ page.content | markdown | safe }}{% else %}(Untitled){% endif %}
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="page-cols-second">
+		{% if page.tasks.length  %}
+		<h2>Tasks</h2>
+		<form method="post" action="/tasks" id="tasks" data-task-form>
+		<input type="hidden" name="_method" value="PATCH">
+		<ul class="tasks flat-list">
+		{% for task in page.tasks %}
+		<li data-task="{{ task.id }}" class="task {% if not task.is_actionable %}task--is-incomplete {% endif %}{% if task.is_done %}task--is-done {% endif %}{% if task.is_starred %}task--is-starred {% endif %}">
+			<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
+			<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title | titleize | linkize | safe }}{% else %}(Untitled){% endif %}</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
+		</li>
+		{% endfor %}
+		</ul>
+		</form>
+		{% endif %}
+
+		{% if page.pages.length %}
+		<h2 id="pages">Related</h2>
+		<ul class="pages flat-list">
+		{% for childPage in page.pages %}
+		<li>
+			<a class="page__full-link" href="/pages/{{ childPage.id }}">{% if childPage.content %}{{ childPage.title | titleize | linkize | safe }}{% else %}(Untitled){% endif %}</a>
+		</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+	</div>
+</div>
+	<div class="add-item" hidden>
+		<form method="post" action="/tasks" data-create-task><textarea name="content" class="flexi" placeholder="Can haz task."></textarea>
+			<input type="hidden" name="page" value="{{ page.id }}">
+		<ul class="flat-list inline-list">
+			<li>
+				<button class="button" type="submit">Add it<span class="m-and-up"> to the page</span>!</button>
+			</li>
+			<li>
+				<div>
+					<input type="checkbox" id="new_task_is_actionable" name="is_actionable">
+					<label for="new_task_is_actionable">Actionable<span class="m-and-up"> fo sho</span>.</label>
+				</div>
+				<div>
+					<input type="checkbox" id="new_task_is_starred" name="is_starred">
+					<label for="new_task_is_starred">Star<span class="m-and-up"> that shit</span>.</label>
+				</div>
+			</li>
+		</ul>
+		</form>
+	</div>
+</article>
+</section>
+</main>
+{% endblock %}

@@ -11,5 +11,32 @@
 
 	{% block content %}{% endblock %}
 
+	<script>
+		(function() {
+			var taskForm = document.querySelectorAll('[data-task-form] input[type=checkbox]');
+			[].forEach.call(taskForm, function(el) {
+				el.addEventListener('change', function(event) {
+					var hiddenElements = document.querySelectorAll('.taskbuttons[hidden]');
+					[].forEach.call(hiddenElements, function(hiddenElement) {
+						hiddenElement.removeAttribute('hidden');
+					})
+				})
+			})
+		}());
+
+		(function() {
+			var elements = document.querySelectorAll('[data-show-add]');
+			[].forEach.call(elements, function(element) {
+				element.addEventListener('click', function(event) {
+					event.preventDefault();
+					var hiddenElements = document.querySelectorAll('.add-item[hidden]');
+					[].forEach.call(hiddenElements, function(hiddenElement) {
+						hiddenElement.removeAttribute('hidden');
+						hiddenElement.querySelector('textarea').focus();
+					})
+				})
+			})
+		}())
+	</script>
 	</body>
 </html>

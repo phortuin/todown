@@ -1,18 +1,23 @@
 {% extends "views/_base.html" %}
 {% from "components/header/header.html" import header %}
+{% from "components/nav/nav.html" import nav %}
 
 {% block content %}
 <main role="main">
-	{{ header() }}
+	{{ header('🔎 Search') }}
+	{{ nav() }}
+
+	<section class="lists">
+
 	<form method="get" action="/search">
-		<input type="text" name="q" placeholder="Type a search query." {% if query %}value="{{ query }}"{% endif %}>
+		<input type="text" class="input__big" name="q" placeholder="Type a search query." {% if query %}value="{{ query }}"{% endif %} autofocus>
 		<button class="button">Search</button>
 	</form>
 
 	{% if tasks %}
 	<h1>Results for ‘{{ query }}’</h1>
 
-	<form method="post" action="/tasks">
+	<form method="post" action="/tasks" id="tasks" data-task-form>
 	<input type="hidden" name="_method" value="PATCH">
 	<ul class="tasks flat-list">
 		{% for task in tasks %}
@@ -22,9 +27,8 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<button type="submit" class="button" name="_action" value="done">Mark as done.</button>
-	<button type="submit" class="button button--secondary" name="_action" value="star">Have a star.</button>
 	</form>
 	{% endif %}
+	</section>
 </main>
 {% endblock %}

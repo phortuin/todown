@@ -1,0 +1,17 @@
+{% extends "views/_base.html" %}
+{% from "components/nav/nav.html" import nav %}
+{% from "components/header/header.html" import header %}
+
+{% block content %}
+<main role="main">
+	{{ header('📚 Pages / Create') }}
+	{{ nav() }}
+
+	<section class="lists">
+		<form method="post" action="/pages">
+			<textarea name="content" class="tall" placeholder="Fresh page here." autofocus></textarea>
+			<button class="button" type="submit">Make it!</button>
+		</form>
+	</section>
+</main>
+{% endblock %}

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { getTitleFromMarkdown, getScheduledHumanReadable } = require('../helpers')
 mongoose.Promise = require('bluebird');
 
 const TaskSchema = new mongoose.Schema({
@@ -6,22 +7,22 @@ const TaskSchema = new mongoose.Schema({
 	is_done: false,
 	is_actionable: false,
 	is_starred: false,
+	is_quick: false,
+	scheduled_date: Date,
 	bumps: 0
 });
 
 // Add a text index on content, so we can search it
 // Source: https://stackoverflow.com/questions/28775051/best-way-to-perform-a-full-text-search-in-mongodb-and-mongoose
 TaskSchema.index({ content: 'text' });
-
-// Regex matches anything on line one but without optional pound marks (Markdown heading notation)
-// Group 2 is the match we're looking for.
-//
-// Note: don’t use fat arrow function, as the scope will be bound to an undefined `this`,
-// whereas the get closure is bound to TaskSchema
-TaskSchema.virtual('title').get(function() {
-	const matches = this.content.match(/^(#{1,}\s+)?(.+)/m);
-	return matches ? matches[2] : '';
+TaskSchema.virtual('title').get(getTitleFromMarkdown);
+TaskSchema.virtual('scheduled_hr').get(getScheduledHumanReadable);
+TaskSchema.virtual('page', { // task lives on which page?
+	ref: 'Page',
+	localField: '_id',
+	foreignField: 'tasks',
+	justOne: true // make sure it returns a single object, not an array
 });
 
-// Export the Mongoose model
+
 module.exports = mongoose.model('Task', TaskSchema);

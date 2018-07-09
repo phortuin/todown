@@ -1,46 +1,48 @@
 {% extends "views/_base.html" %}
-{% from "components/filters/filters.html" import filters %}
+{% from "components/nav/nav.html" import nav %}
 {% from "components/header/header.html" import header %}
 
 {% block content %}
 <main role="main">
-	{{ header() }}
-	{{ filters('/starred') }}
+	{{ header('⭐️ Starred') }}
+	{{ nav() }}
 
-	<form method="post" action="/tasks">
-	<input type="hidden" name="_method" value="PATCH">
-	<input type="hidden" name="redirect" value="/starred">
+	<section class="lists">
+		<form method="post" action="/tasks">
+		<input type="hidden" name="_method" value="PATCH">
+		<input type="hidden" name="redirect" value="/starred">
 
-	<ul class="tasks flat-list">
-	{% for task in tasks %}
-	<li data-task="{{ task.id }}" class="task {% if not task.is_actionable %}task--is-incomplete {% endif %}{% if task.is_done %}task--is-done {% endif %}{% if task.is_starred %}task--is-starred {% endif %}">
-		<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
-		<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title | titleize }}{% else %}(Untitled){% endif %}</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
-	</li>
-	{% endfor %}
-	</ul>
-	<button type="submit" class="button" name="_action" value="done">Mark as done.</button>
-	<button type="submit" class="button button--secondary" name="_action" value="unstar">Lose the star.</button>
-	</form>
-
-	<div class="add-item">
-		<form method="post" action="tasks" data-create-task><textarea name="content" class="flexi" placeholder="Type a thing."></textarea>
-		<ul class="flat-list inline-list">
-			<li>
-				<button class="button" type="submit">Add it<span class="m-and-up"> to the list</span>!</button>
-			</li>
-			<li>
-				<div>
-					<input type="checkbox" id="new_task_is_actionable" name="is_actionable">
-					<label for="new_task_is_actionable">Actionable<span class="m-and-up"> fo sho</span>.</label>
-				</div>
-				<div>
-					<input type="checkbox" id="new_task_is_starred" name="is_starred">
-					<label for="new_task_is_starred">Star<span class="m-and-up"> that shit</span>.</label>
-				</div>
-			</li>
+		<ul class="tasks flat-list">
+		{% for task in tasks %}
+		<li data-task="{{ task.id }}" class="task {% if not task.is_actionable %}task--is-incomplete {% endif %}{% if task.is_done %}task--is-done {% endif %}{% if task.is_starred %}task--is-starred {% endif %}">
+			<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
+			<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title | titleize }}{% else %}(Untitled){% endif %}</span> <a class="task__detail-link" href="/tasks/{{ task.id }}">&rarr;</a></label>
+		</li>
+		{% endfor %}
 		</ul>
+		<button type="submit" class="button" name="_action" value="done">Mark as done.</button>
+		<button type="submit" class="button button--secondary" name="_action" value="unstar">Lose the star.</button>
 		</form>
-	</div>
+
+		<div class="add-item" hidden>
+			<form method="post" action="tasks" data-create-task><textarea name="content" class="flexi" placeholder="Type a thing."></textarea>
+			<ul class="flat-list inline-list">
+				<li>
+					<button class="button" type="submit">Add it<span class="m-and-up"> to the list</span>!</button>
+				</li>
+				<li>
+					<div>
+						<input type="checkbox" id="new_task_is_actionable" name="is_actionable">
+						<label for="new_task_is_actionable">Actionable<span class="m-and-up"> fo sho</span>.</label>
+					</div>
+					<div>
+						<input type="checkbox" id="new_task_is_starred" name="is_starred">
+						<label for="new_task_is_starred">Star<span class="m-and-up"> that shit</span>.</label>
+					</div>
+				</li>
+			</ul>
+			</form>
+		</div>
+	</main>
 </main>
 {% endblock %}

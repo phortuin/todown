@@ -39,6 +39,7 @@ app.use('/actionable', require('./app/routes/actionable'));
 app.use('/search', require('./app/routes/search'));
 app.use('/tasks', require('./app/routes/tasks'));
 app.use('/starred', require('./app/routes/starred'));
+app.use('/pages', require('./app/routes/pages'));
 
 app.use(express.static('static/'));
 

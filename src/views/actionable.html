@@ -1,9 +1,14 @@
 {% extends "views/_base.html" %}
 {% from "components/header/header.html" import header %}
+{% from "components/nav/nav.html" import nav %}
 
 {% block content %}
 <main role="main">
-	{{ header() }}
+	{{ header('🤾‍♀️ Actionablise') }}
+	{{ nav() }}
+
+	<section class="lists">
+
 	<form method="post" action="/actionable">
 	<input type="hidden" name="_method" value="PATCH">
 	<ul class="tasklist flat-list">
@@ -17,5 +22,6 @@
 	</ul>
 	<button class="button" type="submit">Submit actionables</button>
 	</form>
+	</section>
 </main>
 {% endblock %}

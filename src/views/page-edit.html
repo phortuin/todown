@@ -1,0 +1,35 @@
+{% extends "views/_base.html" %}
+{% from "components/nav/nav.html" import nav %}
+
+{% block content %}
+<main role="main">
+	{{ nav() }}
+
+	<form method="post" action="/pages/{{ page.id }}">
+		<input type="hidden" name="_method" value="PUT">
+		<textarea name="content" class="tall" placeholder="You backspaced much?">{{ page.content }}</textarea>
+		<div>
+			<input type="checkbox" name="is_sticky" id="{{ page.id }}_sticky" {% if page.is_sticky %}checked{% endif %}>
+			<label for="{{ page.id }}_sticky">Page is sticky</label>
+		</div>
+		<br>
+		<label for="tags"><h2>Tags:</h2></label>
+		<input class="input__big" type="text" name="tags" value="{{ page.tags }}" id="tags"><br>
+		<small>(space separated; will show matching tags on this page)</small><br><br>
+		<button class="button" type="submit">Save!</button> <a class="button button--secondary" href="/pages/{{ page.id }}">Show me.</a> or <a href="javascript:history.go(-1)">Go back</a>
+	</form>
+	<div>
+		<br>
+		<form method="post" action="/pages/{{ page.id }}">
+			<input type="hidden" name="_method" value="PUT">
+			Add as child to page
+			<select class="select" name="page" onchange="this.form.submit()">
+				<option>Pick one &darr;</option>
+				{% for page in pages %}
+				<option value="{{ page.id }}">{{ page.title }}</option>
+				{% endfor %}
+			</select>
+		</form>
+	</div>
+</main>
+{% endblock %}

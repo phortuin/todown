@@ -1,16 +1,12 @@
 {% extends "views/_base.html" %}
-{% from "components/header/header.html" import header %}
+{% from "components/nav/nav.html" import nav %}
 
 {% block content %}
 <main role="main">
-{{ header() }}
+{{ nav() }}
 <article>
 	<div class="task__content">
-		{% if task.title === task.content %}
-		{% if task.title %}{{ task.title }}{% else %}(Untitled){% endif %}
-		{% else %}
-		{% if task.content %}{{ task.content | markdown | safe }}{% else %}(Untitled){% endif %}
-		{% endif %}
+		<h1>{% if task.title %}{{ task.title }}{% else %}(Untitled){% endif %}</h1>
 	</div>
 	<form method="post" action="/tasks/{{ task.id }}">
 		<input type="hidden" name="_method" value="PUT">
@@ -18,8 +14,28 @@
 		<div>
 			<input type="checkbox" name="is_actionable" id="{{ task.id }}_actionable" {% if task.is_actionable %}checked{% endif %}>
 			<label for="{{ task.id }}_actionable">Actionable</label>
-			<br><br>
 		</div>
+		<div>
+			<input type="checkbox" name="is_quick" id="{{ task.id }}_quick" {% if task.is_quick %}checked{% endif %}>
+			<label for="{{ task.id }}_quick">Is quick</label>
+		</div>
+		<br>
+		<h2>Schedule:</h2>
+		<ul class="flat-list inline-list">
+			<li>
+				<input type="radio" name="scheduled_date" id="{{ task.id }}_scheduled_date_today" value="today" name="scheduled_date" {% if task.scheduled_hr === 'today' %}checked{% endif %}>
+				<label for="{{ task.id }}_scheduled_date_today">Today</label>
+			</li>
+			<li>
+				<input type="radio" name="scheduled_date" id="{{ task.id }}_scheduled_date_tomorrow" value="tomorrow" name="scheduled_date" {% if task.scheduled_hr === 'tomorrow' %}checked{% endif %}>
+				<label for="{{ task.id }}_scheduled_date_tomorrow">Tomorrow</label>
+				</li>
+			<li>
+				<input type="radio" name="scheduled_date" id="{{ task.id }}_scheduled_date_next_week" value="next_week" name="scheduled_date" {% if task.scheduled_hr === 'next week' %}checked{% endif %}>
+				<label for="{{ task.id }}_scheduled_date_next_week">Next week</label>
+			</li>
+		</ul>
+		<br>
 		<button type="submit" class="button">Save changes</button>
 	</form>
 	<div class="buttons">
@@ -58,6 +74,18 @@
 		<input type="hidden" name="_method" value="DELETE">
 		<button type="submit" class="button button--danger">Delete</button>
 	</form>
+	</div>
+	<div>
+		<form method="post" action="/tasks/{{ task.id }}">
+			<input type="hidden" name="_method" value="PUT">
+			Add to task list of page
+			<select class="select" name="page" onchange="this.form.submit()">
+				<option>Pick one &darr;</option>
+				{% for page in pages %}
+				<option value="{{ page.id }}">{{ page.title }}</option>
+				{% endfor %}
+			</select>
+		</form>
 	</div>
 </article>
 </main>

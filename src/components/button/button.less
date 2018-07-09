@@ -1,5 +1,5 @@
 .button {
-	background: #231f20;
+	background: @black;
 	color: white;
 	font-size: 1em;
 	padding: @margin-half @margin-default;
@@ -8,6 +8,7 @@
 	-webkit-font-smoothing: antialiased;
 	margin-right: 0.75rem;
 	text-decoration: none;
+	text-align: center;
 
 	&:focus {
 		border: 2px dotted @white;
@@ -29,9 +30,9 @@
 }
 
 .button--secondary {
-	border: 2px solid #231f20;
-	background: transparent;
-	color: #231f20;
+	border-color: @grey-light;
+	background: @grey-light;
+	color: @black;
 
 	&:focus {
 		border: 2px dotted @black;
@@ -39,6 +40,16 @@
 }
 
 .button--danger {
-	background-color: @red;
-	border-color: @red;
+	background-color: @yellow-bright;
+	border-color: @yellow-bright;
+	color: @black;
+}
+
+.button--full {
+	display: block;
+	width: 100%;
+}
+
+.button--full + .button--full {
+	margin-top: @margin-default / 2;
 }

@@ -1,0 +1,57 @@
+{% macro nav(pages = []) %}
+<nav class="nav">
+	<ul class="flat-list">
+		<li>
+			<a class="nav__link {% if SITE.path in ['/', '/tasks'] %}nav__link--is-active{% endif %}" href="/">
+				📥
+				<span class="m-and-up">Today</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav__link {% if SITE.path.indexOf('/pages') > -1 %}nav__link--is-active{% endif %}" href="/pages">
+				📓
+				<span class="m-and-up">Pages</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav__link {% if SITE.path in ['/starred'] %}nav__link--is-active{% endif %}" href="/starred">
+				⭐️
+				<span class="m-and-up">Starred</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav__link {% if SITE.path === '/review' %}nav__link--is-active{% endif %}" href="/review">
+				🧐
+				<span class="m-and-up">Review</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav__link {% if SITE.path === '/actionable' %}nav__link--is-active{% endif %}" href="/actionable">
+				⚡️
+				<span class="m-and-up">Actionablise</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav__link {% if SITE.path.indexOf('/search') > -1 %}nav__link--is-active{% endif %}" href="/search">
+				🔍
+				<span class="m-and-up">Search</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav__link {% if SITE.path === '/log' %}nav__link--is-active{% endif %}" href="/log">
+				🌳
+				<span class="m-and-up">Log</span>
+			</a>
+		</li>
+		{% if pages %}
+		<li><br></li>
+		{% for page in pages %}
+		<li>
+			<a class="nav__link" href="/pages/{{ page.id }}">📖 {{ page.title }}</a>
+		</li>
+		{% endfor %}
+		{% endif %}
+	</ul>
+
+</nav>
+{% endmacro %}

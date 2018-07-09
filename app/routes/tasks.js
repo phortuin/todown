@@ -1,24 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const Promise = require('bluebird');
+const moment = require('moment');
 
 const Task = require('../models/task')
+const Page = require('../models/page')
 const renderer = require('../../lib/renderer');
 
 function show(req, res, next) {
-	Task.findById(req.params.id).exec()
+	Task.findById(req.params.id).populate('page').exec()
 		.then(task => {
-			res.send(renderer.render('views/task.html', { task }));
+			res.send(renderer.render('views/task.html', { task: task.toObject({ virtuals: true }) }));
 		}).catch(err => {
 			next(err);
 		})
 }
 
 function edit(req, res, next) {
-	Task.findById(req.params.id).exec()
-		.then(task => {
-			res.send(renderer.render('views/task-edit.html', { task }))
-		}).catch(next)
+	Promise.all([
+		Task.findById(req.params.id).exec(),
+		Page.find().exec()
+	]).spread((task, pages) => {
+		res.send(renderer.render('views/task-edit.html', { task, pages }))
+	}).catch(next)
 }
 
 function update(req, res, next) {
@@ -29,6 +33,7 @@ function update(req, res, next) {
 					task.content = req.body.content;
 					// actionable is part of form that submits content
 					task.is_actionable = !!req.body.is_actionable;
+					task.is_quick = !!req.body.is_quick;
 				}
 				if (req.body.is_done) {
 					const is_done = req.body.is_done === "true" || false;
@@ -45,7 +50,34 @@ function update(req, res, next) {
 				if (req.body.reset_bumps) {
 					task.bumps = 0;
 				}
-				return task.save();
+				if (req.body.scheduled_date) {
+					switch (req.body.scheduled_date) {
+						case 'today':
+							task.scheduled_date = moment().startOf('day');
+							break;
+						case 'tomorrow':
+							task.scheduled_date = moment().add(1, 'd').startOf('day');
+							break;
+						case 'next_week':
+							task.scheduled_date = moment().add(7, 'd').startOf('week');
+							break;
+						default:
+							task.scheduled_date = null;
+							break;
+					}
+				}
+				if (req.body.page) {
+					return task.save()
+						.then(task => {
+							return Page.findById(req.body.page).exec()
+								.then(page => {
+									page.tasks.push(task);
+									return page.save().then(() => task); // looks weird, but promise needs to return task
+								})
+						});
+				} else {
+					return task.save();
+				}
 			}).then(task => {
 				res.send(renderer.render('views/task.html', { task }));
 			}).catch(err => {
@@ -70,7 +102,7 @@ function update(req, res, next) {
 
 function create(req, res, next) {
 	switch(req.body._method) {
-		case "PATCH": // UPDATE
+		case "PATCH": // UPDATE MANY TASKS
 			Task.find().exec().then(tasks => {
 				tasks.forEach(task => {
 					if (req.body[`${task.id}__task`] === 'on') {
@@ -102,13 +134,25 @@ function create(req, res, next) {
 			task.is_done = false;
 			task.is_actionable = !!req.body.is_actionable || false;
 			task.is_starred = !!req.body.is_starred || false;
+			task.is_quick = !!req.body.is_quick || false;
 			if (task.is_starred) {
 				task.is_actionable = true;
 			}
 			task.save()
 				.then(task => {
 					// res.redirect(`/tasks/${task.id}`);
-					res.redirect(`/`);
+					if (req.body.page) {
+						return Page.findById(req.body.page).exec()
+							.then(page => {
+								page.tasks.push(task);
+								return page.save()
+							})
+							.then(page => {
+								res.redirect(`/pages/${ page.id }#tasks`);
+							})
+							.catch(next)
+					}
+					res.redirect(`/tasks/${task.id}/edit`);
 				}).catch(err => {
 					next(err);
 				});
@@ -119,15 +163,21 @@ function create(req, res, next) {
 function list(req, res, next) {
 	let query = {
 		is_actionable: true,
-		is_done: {$ne: true}
+		is_done: {$ne: true},
+		scheduled_date: moment().startOf('day')
 	};
 	if (req.query.show_all) {
 		delete query.is_actionable;
+		delete query.scheduled_date;
 	}
-	Task.find(query).sort({ is_starred: -1, bumps: -1, is_done: 1, is_actionable: -1, content: 1 }).exec()
-		.then(tasks => {
+	Promise.all([
+		Task.find({ is_quick: true, is_done: false }).exec(),
+		Task.find(query).sort({ is_starred: -1, bumps: -1, is_done: 1, is_actionable: -1, content: 1 }).exec(),
+		Page.find({ is_sticky: true }).sort({ title: 1 }).exec(),
+	]).spread(( quickies, tasks, pages ) => {
+			const quick = quickies[Math.floor(Math.random() * quickies.length)];
 			res.format({
-				'text/html': () => res.send(renderer.render('views/index.html', { tasks })),
+				'text/html': () => res.send(renderer.render('views/index.html', { quick, tasks, pages })),
 				'application/json': () => res.json({ tasks })
 			})
 		}).catch(err => {
