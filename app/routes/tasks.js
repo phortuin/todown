@@ -25,139 +25,132 @@ function edit(req, res, next) {
 	}).catch(next)
 }
 
-function update(req, res, next) {
-	switch(req.body._method) {
-		case "PUT":
-			Task.findById(req.params.id).exec().then(task => {
-				if (req.body.content) {
-					task.content = req.body.content;
-					// actionable is part of form that submits content
-					task.is_actionable = !!req.body.is_actionable;
-					task.is_quick = !!req.body.is_quick;
-				}
-				if (req.body.is_done) {
-					const is_done = req.body.is_done === "true" || false;
-					task.is_done = is_done;
-					if (is_done) {
-						task.is_actionable = true;
-						task.is_starred = false;
-					}
-				}
-				if (req.body.is_starred) {
-					const is_starred = req.body.is_starred === "true" || false;
-					task.is_starred = is_starred;
-				}
-				if (req.body.reset_bumps) {
-					task.bumps = 0;
-				}
-				if (req.body.scheduled_date) {
-					switch (req.body.scheduled_date) {
-						case 'today':
-							task.scheduled_date = moment().startOf('day');
-							break;
-						case 'tomorrow':
-							task.scheduled_date = moment().add(1, 'd').startOf('day');
-							break;
-						case 'next_week':
-							task.scheduled_date = moment().add(7, 'd').startOf('week');
-							break;
-						default:
-							task.scheduled_date = null;
-							break;
-					}
-				}
-				if (req.body.page) {
-					return task.save()
-						.then(task => {
-							return Page.findById(req.body.page).exec()
-								.then(page => {
-									page.tasks.push(task);
-									return page.save().then(() => task); // looks weird, but promise needs to return task
-								})
-						});
-				} else {
-					return task.save();
-				}
-			}).then(task => {
-				res.send(renderer.render('views/task.html', { task }));
-			}).catch(err => {
-				next(err);
-			});
-			break;
-		case "DELETE":
-			Task.findByIdAndRemove(req.params.id).exec()
+function put(req, res, next) {
+	Task.findById(req.params.id).exec().then(task => {
+		if (req.body.content) {
+			task.content = req.body.content;
+			// actionable is part of form that submits content
+			task.is_actionable = !!req.body.is_actionable;
+			task.is_quick = !!req.body.is_quick;
+		}
+		if (req.body.is_done) {
+			const is_done = req.body.is_done === "true" || false;
+			task.is_done = is_done;
+			if (is_done) {
+				task.is_actionable = true;
+				task.is_starred = false;
+			}
+		}
+		if (req.body.is_starred) {
+			const is_starred = req.body.is_starred === "true" || false;
+			task.is_starred = is_starred;
+		}
+		if (req.body.reset_bumps) {
+			task.bumps = 0;
+		}
+		if (req.body.scheduled_date) {
+			switch (req.body.scheduled_date) {
+				case 'today':
+					task.scheduled_date = moment().startOf('day');
+					break;
+				case 'tomorrow':
+					task.scheduled_date = moment().add(1, 'd').startOf('day');
+					break;
+				case 'next_week':
+					task.scheduled_date = moment().add(7, 'd').startOf('week');
+					break;
+				default:
+					task.scheduled_date = null;
+					break;
+			}
+		}
+		if (req.body.page) {
+			return task.save()
 				.then(task => {
-					res.redirect('/');
-				}).catch(err => {
-					next(err);
+					return Page.findById(req.body.page).exec()
+						.then(page => {
+							page.tasks.push(task);
+							return page.save().then(() => task); // looks weird, but promise needs to return task
+						})
 				});
-			break;
-		default:
-			const err = new Error('Can’t post to task');
-			err.status = 405;
-			return next(err);
-			break;
-	}
+		} else {
+			return task.save();
+		}
+	}).then(task => {
+		res.send(renderer.render('views/task.html', { task }));
+	}).catch(err => {
+		next(err);
+	});
+}
+
+function deleteTask(req, res, next) {
+	Task.findByIdAndRemove(req.params.id).exec()
+		.then(task => {
+			res.redirect('/');
+		}).catch(err => {
+			next(err);
+		});
+}
+
+function patch(req, res, next) {
+	Task.find().exec().then(tasks => {
+		tasks.forEach(task => {
+			if (req.body[`${task.id}__task`] === 'on') {
+				if (req.body._action === 'done') {
+					task.is_done = true;
+					task.is_actionable = true;
+					task.is_starred = false;
+					task.save();
+				}
+				if (req.body._action === 'not_today') {
+					task.scheduled_date = null;
+					task.save()
+				}
+				if (req.body._action === 'star') {
+					task.is_starred = true;
+					task.save();
+				}
+				if (req.body._action === 'unstar') {
+					task.is_starred = false;
+					task.save();
+				}
+			}
+		});
+	}).then(() => {
+		res.redirect(req.body.redirect || '/');
+	}).catch(err => {
+		next(err);
+	})
 }
 
 function create(req, res, next) {
-	switch(req.body._method) {
-		case "PATCH": // UPDATE MANY TASKS
-			Task.find().exec().then(tasks => {
-				tasks.forEach(task => {
-					if (req.body[`${task.id}__task`] === 'on') {
-						if (req.body._action === 'done') {
-							task.is_done = true;
-							task.is_actionable = true;
-							task.is_starred = false;
-							task.save();
-						}
-						if (req.body._action === 'star') {
-							task.is_starred = true;
-							task.save();
-						}
-						if (req.body._action === 'unstar') {
-							task.is_starred = false;
-							task.save();
-						}
-					}
-				});
-			}).then(() => {
-				res.redirect(req.body.redirect || '/');
-			}).catch(err => {
-				next(err);
-			})
-			break;
-		default:  // CREATE
-			const task = new Task();
-			task.content = req.body.content;
-			task.is_done = false;
-			task.is_actionable = !!req.body.is_actionable || false;
-			task.is_starred = !!req.body.is_starred || false;
-			task.is_quick = !!req.body.is_quick || false;
-			if (task.is_starred) {
-				task.is_actionable = true;
-			}
-			task.save()
-				.then(task => {
-					// res.redirect(`/tasks/${task.id}`);
-					if (req.body.page) {
-						return Page.findById(req.body.page).exec()
-							.then(page => {
-								page.tasks.push(task);
-								return page.save()
-							})
-							.then(page => {
-								res.redirect(`/pages/${ page.id }#tasks`);
-							})
-							.catch(next)
-					}
-					res.redirect(`/tasks/${task.id}/edit`);
-				}).catch(err => {
-					next(err);
-				});
-			break;
+	const task = new Task();
+	task.content = req.body.content;
+	task.is_done = false;
+	task.is_actionable = !!req.body.is_actionable || false;
+	task.is_starred = !!req.body.is_starred || false;
+	task.is_quick = !!req.body.is_quick || false;
+	if (task.is_starred) {
+		task.is_actionable = true;
 	}
+	task.save()
+		.then(task => {
+			// res.redirect(`/tasks/${task.id}`);
+			if (req.body.page) {
+				return Page.findById(req.body.page).exec()
+					.then(page => {
+						page.tasks.push(task);
+						return page.save()
+					})
+					.then(page => {
+						res.redirect(`/pages/${ page.id }#tasks`);
+					})
+					.catch(next)
+			}
+			res.redirect(`/tasks/${task.id}/edit`);
+		}).catch(err => {
+			next(err);
+		});
 }
 
 function list(req, res, next) {
@@ -187,13 +180,15 @@ function list(req, res, next) {
 
 router.route('/')
 	.get(list)
-	.post(create);
+	.post(create)
+	.patch(patch);
 
 router.route('/:id/edit')
 	.get(edit)
 
-router.route('/:id')
+router.route('/:id') // add allowed methods
 	.get(show)
-	.post(update);
+	.put(put)
+	.delete(deleteTask)
 
 module.exports = router;

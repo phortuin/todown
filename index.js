@@ -1,4 +1,5 @@
 require('dotenv-safe').config()
+require('module-alias/register')
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -15,6 +16,7 @@ mongoose.Promise = require('bluebird');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(mongoSanitize()); // Sanitize strings to prevent MongoDB Operator Injection
+app.use(require('@lib/parse-method')) // Parses _method parameters to req.method
 
 app.use((req, res, next) => {
 	renderer.addGlobal('SITE', {
