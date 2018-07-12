@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get('/', (req, res) => res.redirect('/tasks'));
+app.get('/', (req, res) => res.redirect('/today'));
 
 app.use('/log', require('./app/routes/log'));
 app.use('/maintenance', require('./app/routes/maintenance'));
@@ -41,6 +41,8 @@ app.use('/search', require('./app/routes/search'));
 app.use('/tasks', require('./app/routes/tasks'));
 app.use('/starred', require('./app/routes/starred'));
 app.use('/pages', require('./app/routes/pages'));
+
+app.use('/today', require('./app/routes/today'))
 
 app.use(express.static('static/'));
 

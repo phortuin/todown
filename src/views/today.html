@@ -1,0 +1,24 @@
+{% extends "views/_base.html" %}
+{% from "components/task/task.html" import task %}
+{% from "components/action/action.html" import action %}
+
+{% block content %}
+<main role="main">
+	<header role="banner" class="header">
+		<h1>📅 Today</h1>
+	</header>
+	<section>
+		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>
+			<input type="hidden" name="_method" value="PATCH">
+			<input type="hidden" name="is_done" value="true">
+			<ul class="tasks flat-list">
+			{% for taskItem in tasks %}
+				{{ task(taskItem) }}
+			{% endfor %}
+			</ul>
+		</form>
+	</section>
+</main>
+
+{{ action('tasks') }}
+{% endblock %}
