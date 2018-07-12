@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv-safe').config()
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -8,7 +8,6 @@ const Promise = require('bluebird');
 
 const app = express();
 const isDevelopment = ('development' === process.env.NODE_ENV);
-const port = process.env.PORT || 3005;
 
 const Task = require('./app/models/task')
 
@@ -55,9 +54,9 @@ app.use((err, req, res, next) => {
 app.use((req, res, next) => res.status(404).send('404'));
 
 // $RUN
-console.log(`Connecting to MongoDB on ${process.env.DB_HOST}:${process.env.DB_PORT}...`);
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
+mongoose.connect(`${process.env.MONGO_URI}`, { useNewUrlParser: true })
 	.then(() => {
+		const port = process.env.PORT || 3006
 		app.listen(port, () => {
 			if (isDevelopment) {
 				console.log('Development server available on http://localhost:' + port);
@@ -66,5 +65,5 @@ mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${proc
 	})
 	.catch(err => {
 		console.error(err);
-		// process.exit(1);
+		process.exit(1);
 	});
