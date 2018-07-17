@@ -1,7 +1,7 @@
 const Task = require('@models/task')
 const moment = require('moment')
 
-module.exports = function get(req, res, next) {
+module.exports = (req, res, next) => {
 	Task.findById(req.params.id).exec()
 		.then(task => {
 			if (req.body.is_done) {
