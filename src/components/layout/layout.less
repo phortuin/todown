@@ -18,6 +18,22 @@ main {
 	}
 }
 
+.inline-list {
+	display: flex;
+
+	li {
+		margin-left: @margin-default;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}
+
+.pull-right {
+	float: right;
+}
+
 section {
 	margin-top: @margin-default;
 }
