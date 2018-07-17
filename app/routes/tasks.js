@@ -4,6 +4,7 @@ const router = express.Router()
 router.route('/')
 	.get(require('@routes/tasks/list'))
 	.post(require('@routes/tasks/post'))
+	.patch(require('@routes/tasks/bulk'))
 
 router.route('/:id')
 	.get(require('@routes/tasks/get'))

@@ -1,4 +1,5 @@
 {% extends "views/_base.html" %}
+{% from "components/action/action.html" import action %}
 {% from "components/task/task.html" import task %}
 {% from "components/title/title.html" import title %}
 
@@ -8,9 +9,8 @@
 		{{ title('All tasks') }}
 	</header>
 	<section>
-		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>
+		<form method="post" action="/tasks?redirect=/tasks" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">
-			<input type="hidden" name="is_done" value="true">
 			<ul class="tasks flat-list">
 			{% for taskItem in tasks %}
 				{{ task(taskItem) }}
@@ -20,9 +20,5 @@
 	</section>
 </main>
 
-<div class="action">
-	<!-- <button class="button button-primary" type="submit" name="_action" value="done" form="{{ formId }}">Set done.</button> -->
-	<!-- <button class="button button-primary" type="submit" name="_action" value="not_today" form="{{ formId }}">Not today.</button> -->
-	<a class="button button--secondary" data-trigger-form="create" href="/create">Add task</a>
-</div>
+{{ action() }}
 {% endblock %}

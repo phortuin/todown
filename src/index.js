@@ -12,7 +12,10 @@
 
 	const formTriggers = toArray(document.querySelectorAll('[data-trigger-form]'))
 	const sidebarOpeners = toArray(document.querySelectorAll('[data-open-sidebar]'))
+	const taskForm = document.querySelector('[data-task-form]')
 	const sidemenuEl = document.getElementById('sidemenu')
+	const actionDefault = document.getElementById('action-default')
+	const actionBulk = document.getElementById('action-bulk')
 
 	formTriggers.forEach(formTrigger => {
 		formTrigger.addEventListener('click', event => {
@@ -27,5 +30,10 @@
 			event.preventDefault()
 			removeHiddenAndTransit(sidemenuEl)
 		})
+	})
+
+	taskForm.addEventListener('change', event => {
+		actionDefault.setAttribute('hidden', 'hidden')
+		actionBulk.removeAttribute('hidden')
 	})
 }
