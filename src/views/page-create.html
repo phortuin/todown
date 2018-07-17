@@ -1,0 +1,11 @@
+{% extends "views/_base.html" %}
+
+{% block content %}
+<form action="/pages" method="post">
+	{{ editor() }}
+	<div class="action">
+		<button type="submit" class="button">Create page</button>
+		&nbsp;or <a href="/">Cancel</a>
+	</div>
+</form>
+{% endblock %}

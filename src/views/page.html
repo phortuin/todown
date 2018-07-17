@@ -1,0 +1,13 @@
+{% extends "views/_base.html" %}
+{% from "components/title/title.html" import title %}
+
+{% block content %}
+<main role="main">
+	<header role="banner" class="header">
+		{{ title('Page') }}
+	</header>
+	<section>
+		{{ page.content | markdown | safe }}
+	</section>
+</main>
+{% endblock %}

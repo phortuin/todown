@@ -1,3 +1,7 @@
+{% from "components/editor/editor.html" import editor -%}
+{% from "components/title/title.html" import title -%}
+{% from "components/sections/sections.html" import sections -%}
+
 <!doctype html>
 <html>
 	<head>
@@ -10,6 +14,23 @@
 	<body>
 
 	{% block content %}{% endblock %}
+
+	<section class="modal closed" id="create" hidden>
+		<header role="banner" class="header">
+			{{ title('Create task') }}
+		</header>
+		<form action="/tasks" method="post">
+			{{ editor() }}
+			<div class="action">
+				<button type="submit" class="button">Save task</button>
+				&nbsp;or <a href="/">Cancel</a>
+			</div>
+			</form>
+	</section>
+
+	<nav class="sidemenu closed" id="sidemenu" hidden>
+		{{ sections() }}
+	</nav>
 
 	</body>
 </html>

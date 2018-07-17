@@ -5,10 +5,9 @@
 {% block content %}
 <main role="main">
 	<header role="banner" class="header">
-		{{ title('Today') }}
+		{{ title('All tasks') }}
 	</header>
-	<section
-		class="task-list">
+	<section>
 		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">
 			<input type="hidden" name="is_done" value="true">

@@ -1,6 +1,11 @@
 {% macro task(task) %}
-<li class="task {% if not task.is_actionable %}task--is-incomplete {% endif %}{% if task.is_done %}task--is-done {% endif %}">
+<li class="task">
 	<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
-	<label for="{{ task.id }}__task"><span>{% if task.content %}{{ task.title | titleize | safe }}{% else %}(Untitled){% endif %}</span></label>
+	<label for="{{ task.id }}__task">
+		{% if task.is_done %}<del>{% endif %}
+		<span>{% if task.content %}{{ task.title | titleize | safe }}{% else %}(Untitled){% endif %}</span>
+		{% if task.is_done %}</del>{% endif %}
+	</label>
+	<a class="task__link" href="/tasks/{{ task.id }}">❯</a>
 </li>
 {% endmacro %}

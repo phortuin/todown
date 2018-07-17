@@ -1,0 +1,18 @@
+{% extends "views/_base.html" %}
+{% from "components/page/page.html" import page %}
+{% from "components/title/title.html" import title %}
+
+{% block content %}
+<main role="main">
+	<header role="banner" class="header">
+		{{ title('All pages') }}
+	</header>
+	<section>
+		<ul class="pages flat-list">
+		{% for pageItem in pages %}
+			{{ page(pageItem) }}
+		{% endfor %}
+		</ul>
+	</section>
+</main>
+{% endblock %}

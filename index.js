@@ -7,48 +7,24 @@ const mongoSanitize = require('express-mongo-sanitize');
 const renderer = require('./lib/renderer');
 const Promise = require('bluebird');
 
-const app = express();
-const isDevelopment = ('development' === process.env.NODE_ENV);
-
-const Task = require('./app/models/task')
-
 mongoose.Promise = require('bluebird');
 
+const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(mongoSanitize()); // Sanitize strings to prevent MongoDB Operator Injection
 app.use(require('@lib/parse-method')) // Parses _method parameters to req.method
 
-app.use((req, res, next) => {
-	renderer.addGlobal('SITE', {
-		title: 'Todown',
-		description: 'Todownify yo self',
-		current_url: req.protocol + '://' + req.get('host') + req.originalUrl,
-		host: req.get('host'),
-		domain: req.protocol + '://' + req.get('host') + '/',
-		path: req.path
-	});
-	renderer.addGlobal('QS', req.query);
-	next();
-});
-
-app.get('/', (req, res) => res.redirect('/today'));
-
-app.use('/log', require('./app/routes/log'));
-app.use('/maintenance', require('./app/routes/maintenance'));
-app.use('/review', require('./app/routes/review'));
-app.use('/actionable', require('./app/routes/actionable'));
-app.use('/search', require('./app/routes/search'));
-app.use('/tasks', require('./app/routes/tasks'));
-app.use('/starred', require('./app/routes/starred'));
-app.use('/pages', require('./app/routes/pages'));
-
-app.use('/today', require('./app/routes/today'))
+app.get('/', (req, res) => res.redirect('/today'))
+app.use('/today', require('@routes/today'))
+app.use('/pages', require('@routes/pages'))
+app.use('/tasks', require('@routes/tasks'))
+app.use('/sections', require('@routes/sections'))
 
 app.use(express.static('static/'));
 
 // Error
 app.use((err, req, res, next) => {
-	if (isDevelopment) {
+	if (app.get('env') === 'development') {
 		console.error(err);
 	}
 	res.status(err.status || 500).send(err.message || 'Internal Server Error');
@@ -62,7 +38,7 @@ mongoose.connect(`${process.env.MONGO_URI}`, { useNewUrlParser: true })
 	.then(() => {
 		const port = process.env.PORT || 3006
 		app.listen(port, () => {
-			if (isDevelopment) {
+			if (app.get('env') === 'development') {
 				console.log('Development server available on http://localhost:' + port);
 			}
 		});
