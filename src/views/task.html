@@ -7,14 +7,16 @@
 		{{ title('Task') }}
 	</header>
 	<section>
-		{{ task.content }}
+		{% if task.is_done %}<del>{% endif %}
+			{{ task.content }}
+		{% if task.is_done %}</del>{% endif %}
 	</section>
 </main>
 
 <div class="action">
 	<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 		<input type="hidden" name="_method" value="patch">
-		<ul class="flat-list">
+		<ul class="flat-list inline-list">
 			<li>
 				<input type="radio" name="scheduled_date" id="{{ task.id }}_scheduled_date_today" value="today" name="scheduled_date" {% if task.scheduled_hr === 'today' %}checked{% endif %}>
 				<label for="{{ task.id }}_scheduled_date_today">Today</label>
@@ -27,8 +29,13 @@
 	</form>
 	<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 		<input type="hidden" name="_method" value="patch">
-		<input type="hidden" name="is_done" value="true">
-		<button class="button" type="submit">Set done</button>
+		<input type="hidden" name="_action" value="done">
+		<input type="checkbox" name="is_done" id="{{ task.id }}__is_done" {% if task.is_done %}checked{% endif %}>
+		<label for="{{ task.id }}__is_done">Task is done</label>
+	</form>
+	<form method="post" onsubmit="return confirm('Serious.ly')" action="/tasks/{{ task.id }}?redirect=/tasks" class="pull-right">
+		<input type="hidden" name="_method" value="delete">
+		<button class="button button--secondary">Delete</button>
 	</form>
 </div>
 {% endblock %}

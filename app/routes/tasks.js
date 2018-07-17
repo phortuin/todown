@@ -9,5 +9,6 @@ router.route('/')
 router.route('/:id')
 	.get(require('@routes/tasks/get'))
 	.patch(require('@routes/tasks/patch'))
+	.delete(require('@routes/tasks/delete'))
 
 module.exports = router
