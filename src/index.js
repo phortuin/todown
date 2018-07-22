@@ -10,6 +10,10 @@
 		return [].slice.call(arrayLike)
 	}
 
+	function someTasksChecked(taskInputArray) {
+		return taskInputArray.some(taskInputItem => taskInputItem.checked)
+	}
+
 	const formTriggers = toArray(document.querySelectorAll('[data-trigger-form]'))
 	const sidebarOpeners = toArray(document.querySelectorAll('[data-open-sidebar]'))
 	const taskForm = document.querySelector('[data-task-form]')
@@ -32,8 +36,16 @@
 		})
 	})
 
-	taskForm.addEventListener('change', event => {
-		actionDefault.setAttribute('hidden', 'hidden')
-		actionBulk.removeAttribute('hidden')
-	})
+	if (taskForm) {
+		const taskFormInputs = toArray(taskForm.elements)
+		taskForm.addEventListener('change', event => {
+			if (someTasksChecked(taskFormInputs)) {
+				actionDefault.setAttribute('hidden', 'hidden')
+				actionBulk.removeAttribute('hidden')
+			} else {
+				actionDefault.removeAttribute('hidden')
+				actionBulk.setAttribute('hidden', 'hidden')
+			}
+		})
+	}
 }
