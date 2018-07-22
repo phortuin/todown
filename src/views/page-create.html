@@ -1,11 +1,16 @@
 {% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
 
 {% block content %}
-<form action="/pages" method="post">
-	{{ editor() }}
-	<div class="action">
-		<button type="submit" class="button">Create page</button>
-		&nbsp;or <a href="/pages">Cancel</a>
-	</div>
-</form>
+{{ header('New page') }}
+<main role="main">
+	<form action="/pages" method="post" id="create-page">
+		{{ editor() }}
+	</form>
+</main>
+
+<div class="action">
+	<button type="submit" class="button" form="create-page">Create page</button>
+	&nbsp;or <a href="/pages">Cancel</a>
+</div>
 {% endblock %}

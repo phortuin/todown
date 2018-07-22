@@ -11,6 +11,9 @@ router.route('/create')
 
 router.route('/:id')
 	.get(require('@routes/pages/get'))
+	.patch(require('@routes/pages/patch'))
 
+router.route('/:id/edit')
+	.get(require('@routes/pages/edit'))
 
 module.exports = router
