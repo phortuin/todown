@@ -2,8 +2,10 @@ const Task = require('@models/task')
 const moment = require('moment')
 
 module.exports = (req, res, next) => {
+	let redirectTarget
 	Task.findById(req.params.id).exec()
 		.then(task => {
+			redirectTarget = `/tasks/${task.id}`
 			if (req.body.is_done) {
 				task.is_done = true
 			}
@@ -14,6 +16,7 @@ module.exports = (req, res, next) => {
 				switch (req.body.scheduled_date) {
 					case 'today':
 						task.scheduled_date = moment().startOf('day');
+						redirectTarget = '/today'
 						break;
 					case 'tomorrow':
 						task.scheduled_date = moment().add(1, 'd').startOf('day');
@@ -24,6 +27,6 @@ module.exports = (req, res, next) => {
 				}
 			}
 			return task.save()
-		}).then(task => res.redirect(`/tasks/${task.id}`))
+		}).then(task => res.redirect(redirectTarget))
 		.catch(next)
 }
