@@ -1,7 +1,11 @@
-{% macro title(title) %}
+{% macro title(title, section) %}
 <h1
 	class="title">
 	<a class="title__header title__menu-opener" data-open-sidebar href="/sections">☰</a>
-	<a class="title__header" data-open-sidebar href="/sections">&nbsp;{{ title }}</a>
+	{% if section %}
+		<a class="title__header" href="{{ section.url }}">{{ section.name }}</a>
+	{% endif %}
+	{% if section and title %} / {% endif %}
+	{{ title }}
 </h1>
 {% endmacro %}

@@ -1,13 +1,11 @@
 {% extends "views/_base.html" %}
 {% from "components/action/action.html" import action %}
+{% from "components/header/header.html" import header %}
 {% from "components/task/task.html" import task %}
-{% from "components/title/title.html" import title %}
 
 {% block content %}
+{{ header('Today') }}
 <main role="main">
-	<header role="banner" class="header">
-		{{ title('Today') }}
-	</header>
 	<section
 		class="task-list">
 		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>

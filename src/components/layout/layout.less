@@ -1,6 +1,6 @@
 main {
 	width: 100%;
-	padding: @margin-default;
+	padding: @margin-default * 4 @margin-default @margin-default * 5; // compensate for header/footer fixed bars
 
 	@media @l {
 		max-width: 40rem;
@@ -32,8 +32,4 @@ main {
 
 .pull-right {
 	float: right;
-}
-
-section {
-	margin-top: @margin-default;
 }

@@ -1,13 +1,15 @@
 {% extends "views/_base.html" %}
-{% from "components/title/title.html" import title %}
+{% from "components/header/header.html" import header %}
 
 {% block content %}
+{{ header(page.title, { url: '/pages', name: 'Pages' }) }}
 <main role="main">
-	<header role="banner" class="header">
-		{{ title('Page') }}
-	</header>
-	<section>
+	<section class="page-content">
 		{{ page.content | markdown | safe }}
 	</section>
 </main>
+
+<div class="action">
+	<a href="/pages/{{ page.id }}/edit" class="button button--secondary">Edit page.</a>
+</div>
 {% endblock %}

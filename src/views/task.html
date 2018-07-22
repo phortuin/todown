@@ -1,14 +1,12 @@
 {% extends "views/_base.html" %}
-{% from "components/title/title.html" import title %}
+{% from "components/header/header.html" import header %}
 
 {% block content %}
+{{ header(section = { url: '/tasks', name: 'Tasks'}) }}
 <main role="main">
-	<header role="banner" class="header">
-		{{ title('Task') }}
-	</header>
 	<section>
 		{% if task.is_done %}<del>{% endif %}
-			{{ task.content }}
+			{{ task.content | markdown | safe }}
 		{% if task.is_done %}</del>{% endif %}
 	</section>
 </main>

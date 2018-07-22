@@ -1,0 +1,7 @@
+a {
+	color: @blue;
+
+	&:not(:empty)[href^=http]:after {
+		content: "↗"
+	}
+}

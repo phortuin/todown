@@ -1,12 +1,10 @@
 {% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
 {% from "components/page/page.html" import page %}
-{% from "components/title/title.html" import title %}
 
 {% block content %}
+{{ header('All pages') }}
 <main role="main">
-	<header role="banner" class="header">
-		{{ title('All pages') }}
-	</header>
 	<section>
 		<ul class="pages flat-list">
 		{% for pageItem in pages %}
@@ -15,4 +13,7 @@
 		</ul>
 	</section>
 </main>
+<div class="action">
+	<a href="/pages/create" class="button button--secondary">Create page</a>
+</div>
 {% endblock %}

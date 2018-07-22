@@ -1,0 +1,7 @@
+{% from "components/title/title.html" import title as _title %}
+
+{% macro header(title, section) %}
+<header role="banner" class="header">
+	{{ _title(title, section) }}
+</header>
+{% endmacro %}

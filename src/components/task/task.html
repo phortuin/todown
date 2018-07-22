@@ -3,7 +3,7 @@
 	<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
 	<label for="{{ task.id }}__task">
 		{% if task.is_done %}<del>{% endif %}
-		<span>{% if task.content %}{{ task.title | titleize | safe }}{% else %}(Untitled){% endif %}</span>
+		{% if task.content %}{{ task.title | titleize | safe }}{% else %}(Untitled){% endif %}
 		{% if task.is_done %}</del>{% endif %}
 	</label>
 	<a class="task__link" href="/tasks/{{ task.id }}">❯</a>
