@@ -11,4 +11,7 @@ router.route('/:id')
 	.patch(require('@routes/tasks/patch'))
 	.delete(require('@routes/tasks/delete'))
 
+router.route('/:id/edit')
+	.get(require('@routes/tasks/edit'))
+
 module.exports = router

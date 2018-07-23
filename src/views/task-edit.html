@@ -1,0 +1,17 @@
+{% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
+
+{% block content %}
+{{ header('Editing “' + task.title + '”') }}
+<main role="main">
+	<form action="/tasks/{{ task.id }}" method="post" id="edit-task">
+		<input type="hidden" name="_method" value="PATCH">
+		{{ editor(task.content) }}
+	</form>
+</main>
+
+<div class="action">
+	<button type="submit" class="button" form="edit-task">Save task</button>
+	&nbsp;or <a href="/tasks/{{ task.id }}">Cancel</a>
+</div>
+{% endblock %}

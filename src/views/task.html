@@ -31,9 +31,8 @@
 		<input type="checkbox" name="is_done" id="{{ task.id }}__is_done" {% if task.is_done %}checked{% endif %}>
 		<label for="{{ task.id }}__is_done">Task is done</label>
 	</form>
-	<form method="post" onsubmit="return confirm('Serious.ly')" action="/tasks/{{ task.id }}?redirect=/tasks" class="pull-right">
-		<input type="hidden" name="_method" value="delete">
-		<button class="button button--secondary">Delete</button>
-	</form>
+	<br>
+	<a href="/tasks/{{ task.id }}/edit" class="button">Edit.</a>
+
 </div>
 {% endblock %}

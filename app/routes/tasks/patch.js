@@ -26,6 +26,9 @@ module.exports = (req, res, next) => {
 						break;
 				}
 			}
+			if (req.body.content) {
+				task.content = req.body.content
+			}
 			return task.save()
 		}).then(task => res.redirect(redirectTarget))
 		.catch(next)
