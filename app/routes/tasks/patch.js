@@ -15,15 +15,15 @@ module.exports = (req, res, next) => {
 			if (req.body.scheduled_date) {
 				switch (req.body.scheduled_date) {
 					case 'today':
-						task.scheduled_date = moment().startOf('day');
+						task.scheduled_date = moment().startOf('day')
 						redirectTarget = '/today'
-						break;
+						break
 					case 'tomorrow':
-						task.scheduled_date = moment().add(1, 'd').startOf('day');
-						break;
+						task.scheduled_date = moment().add(1, 'd').startOf('day')
+						break
 					default:
-						task.scheduled_date = null;
-						break;
+						task.scheduled_date = null
+						break
 				}
 			}
 			if (req.body.content) {
