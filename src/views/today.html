@@ -5,8 +5,8 @@
 {% from "components/task/task.html" import task %}
 
 {% block content %}
-{{ header('Today') }}
 <main class="main--has-action-bar" role="main">
+	{{ header('Today') }}
 	<section
 		class="task-list">
 		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>
@@ -19,7 +19,6 @@
 		</form>
 	</section>
 </main>
-
 {{ action(secondary = { value: 'not_today', label: 'Not today.' }) }}
 {% endblock %}
 

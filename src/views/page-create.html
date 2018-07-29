@@ -3,8 +3,8 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
-{{ header('New page') }}
 <main class="main--has-action-bar" role="main">
+	{{ header('New page') }}
 	<form action="/pages" method="post" id="create-page">
 		{{ editor() }}
 	</form>

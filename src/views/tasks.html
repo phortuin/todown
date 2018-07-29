@@ -5,8 +5,8 @@
 {% from "components/task/task.html" import task %}
 
 {% block content %}
-{{ header('All tasks') }}
 <main class="main--has-action-bar" role="main">
+	{{ header('All tasks') }}
 	<section>
 		<form method="post" action="/tasks?redirect=/tasks" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">

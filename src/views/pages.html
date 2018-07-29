@@ -3,8 +3,8 @@
 {% from "components/page/page.html" import page %}
 
 {% block content %}
-{{ header('All pages') }}
 <main class="main--has-action-bar" role="main">
+	{{ header('All pages') }}
 	<section>
 		<ul class="pages flat-list">
 		{% for pageItem in pages %}

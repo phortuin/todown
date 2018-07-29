@@ -1,6 +1,15 @@
 main {
 	width: 100%;
 	padding: @margin-default * 4 @margin-default 0; // compensate for fixed header
+	transition: filter 100ms ease-out;
+	transition: transform 200ms ease-out;
+	transform-origin: top center;
+
+	&.blocked {
+		user-select: none;
+		filter: blur(5px);
+		transform: translateY(1rem) scale(0.98);
+	}
 
 	&.main--has-action-bar {
 		padding-bottom: @margin-default * 5;

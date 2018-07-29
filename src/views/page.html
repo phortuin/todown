@@ -2,8 +2,8 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
-{{ header(page.title, { url: '/pages', name: 'Pages' }) }}
 <main class="main--has-action-bar" role="main">
+	{{ header(page.title, { url: '/pages', name: 'Pages' }) }}
 	<section class="page-content">
 		{{ page.content | markdown | safe }}
 	</section>

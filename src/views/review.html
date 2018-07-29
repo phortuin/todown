@@ -5,8 +5,8 @@
 {% from "components/task/task.html" import task %}
 
 {% block content %}
-{{ header('Review', variant = 'review') }}
 <main role="main">
+	{{ header('Review', variant = 'review') }}
 	<form method="post" action="/review">
 		<ul class="flat-list review-list">
 		{% for task in tasks %}

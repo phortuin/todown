@@ -3,8 +3,8 @@
 {% from "components/header/header.html" import header %}
 
 {% block content %}
-{{ header('Editing “' + task.title + '”') }}
 <main class="main--has-action-bar" role="main">
+	{{ header('Editing “' + task.title + '”') }}
 	<form action="/tasks/{{ task.id }}" method="post" id="edit-task">
 		<input type="hidden" name="_method" value="PATCH">
 		{{ editor(task.content) }}
