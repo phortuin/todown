@@ -1,6 +1,10 @@
 main {
 	width: 100%;
-	padding: @margin-default * 4 @margin-default @margin-default * 5; // compensate for header/footer fixed bars
+	padding: @margin-default * 4 @margin-default 0; // compensate for fixed header
+
+	&.main--has-action-bar {
+		padding-bottom: @margin-default * 5;
+	}
 
 	@media @l {
 		max-width: 40rem;

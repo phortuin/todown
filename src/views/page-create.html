@@ -1,9 +1,10 @@
 {% extends "views/_base.html" %}
+{% from "components/editor/editor.html" import editor %}
 {% from "components/header/header.html" import header %}
 
 {% block content %}
 {{ header('New page') }}
-<main role="main">
+<main class="main--has-action-bar" role="main">
 	<form action="/pages" method="post" id="create-page">
 		{{ editor() }}
 	</form>

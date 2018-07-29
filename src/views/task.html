@@ -3,7 +3,7 @@
 
 {% block content %}
 {{ header(section = { url: '/tasks', name: 'Tasks'}) }}
-<main role="main">
+<main class="main--has-action-bar" role="main">
 	<section>
 		{% if task.is_done %}<del>{% endif %}
 			{{ task.content | markdown | safe }}

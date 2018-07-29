@@ -1,9 +1,10 @@
 {% extends "views/_base.html" %}
+{% from "components/editor/editor.html" import editor %}
 {% from "components/header/header.html" import header %}
 
 {% block content %}
 {{ header('Editing “' + page.title + '”') }}
-<main role="main">
+<main class="main--has-action-bar" role="main">
 	<form action="/pages/{{ page.id }}" method="post" id="edit-page">
 		<input type="hidden" name="_method" value="PATCH">
 		{{ editor(page.content) }}

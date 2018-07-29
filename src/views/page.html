@@ -3,7 +3,7 @@
 
 {% block content %}
 {{ header(page.title, { url: '/pages', name: 'Pages' }) }}
-<main role="main">
+<main class="main--has-action-bar" role="main">
 	<section class="page-content">
 		{{ page.content | markdown | safe }}
 	</section>

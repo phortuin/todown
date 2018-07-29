@@ -1,9 +1,10 @@
 {% extends "views/_base.html" %}
+{% from "components/editor/editor.html" import editor %}
 {% from "components/header/header.html" import header %}
 
 {% block content %}
 {{ header('Editing “' + task.title + '”') }}
-<main role="main">
+<main class="main--has-action-bar" role="main">
 	<form action="/tasks/{{ task.id }}" method="post" id="edit-task">
 		<input type="hidden" name="_method" value="PATCH">
 		{{ editor(task.content) }}

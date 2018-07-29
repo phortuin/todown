@@ -1,11 +1,12 @@
 {% extends "views/_base.html" %}
 {% from "components/action/action.html" import action %}
+{% from "components/create-task/create-task.html" import createTask %}
 {% from "components/header/header.html" import header %}
 {% from "components/task/task.html" import task %}
 
 {% block content %}
 {{ header('Today') }}
-<main role="main">
+<main class="main--has-action-bar" role="main">
 	<section
 		class="task-list">
 		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>
@@ -20,4 +21,8 @@
 </main>
 
 {{ action(secondary = { value: 'not_today', label: 'Not today.' }) }}
+{% endblock %}
+
+{% block modals %}
+{{ createTask() }}
 {% endblock %}
