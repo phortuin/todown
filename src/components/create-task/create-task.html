@@ -1,0 +1,14 @@
+{% from "components/editor/editor.html" import editor %}
+{% macro createTask() %}
+<section class="modal closed" id="create-task" hidden>
+	<a href="/tasks" data-hide-form="create-task" class="modal__close pull-right"></a>
+	<div class="modal__body">
+		<strong>Create task</strong>
+		<form action="/tasks" method="post">
+			{{ editor(variant = 'small') }}
+			<button type="submit" class="button">Save task</button>
+			&nbsp;or <a href="/tasks" data-hide-form="create-task">Cancel</a>
+		</form>
+	</div>
+</section>
+{% endmacro %}

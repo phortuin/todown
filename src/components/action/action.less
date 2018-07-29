@@ -5,4 +5,10 @@
 	left: 0;
 	background: @white-almost;
 	padding: @margin-default;
+	transition: transform 100ms ease-out;
+	transform: translateY(0);
+
+	&.closed {
+		transform: translateY(100%);
+	}
 }
