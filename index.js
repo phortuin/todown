@@ -18,6 +18,7 @@ app.get('/', (req, res) => res.redirect('/today'))
 app.use('/today', require('@routes/today'))
 app.use('/pages', require('@routes/pages'))
 app.use('/tasks', require('@routes/tasks'))
+app.use('/review', require('@routes/review'))
 app.use('/sections', require('@routes/sections'))
 
 app.use(express.static('static/'));
