@@ -1,4 +1,4 @@
-{% from "components/editor/editor.html" import editor -%}
+{% from "components/header/header.html" import header -%}
 {% from "components/title/title.html" import title -%}
 {% from "components/sections/sections.html" import sections -%}
 
@@ -13,25 +13,14 @@
 	</head>
 	<body>
 
-	{% block content %}{% endblock %}
+		<div class="overlay closed" hidden data-overlay></div>
 
-	<section class="modal closed" id="create" hidden>
+		{% block content %}{% endblock %}
 		{% block modals %}{% endblock %}
-		<header role="banner" class="header">
-			{{ title('Create task') }}
-		</header>
-		<form action="/tasks" method="post">
-			{{ editor() }}
-			<div class="action">
-				<button type="submit" class="button">Save task</button>
-				&nbsp;or <a href="/">Cancel</a>
-			</div>
-			</form>
-	</section>
 
-	<nav class="sidemenu closed" id="sidemenu" hidden>
-		{{ sections() }}
-	</nav>
+		<nav class="sidemenu closed" data-sidemenu hidden>
+			{{ sections() }}
+		</nav>
 
 	</body>
 </html>
