@@ -5,8 +5,9 @@
 {% from "components/task/task.html" import task %}
 
 {% block content %}
-<main role="main">
-	{{ header('Review', variant = 'review') }}
+{{ header('Review', variant = 'review') }}
+{# @todo header should be inside main, but this will break prettiness on review page #}
+<main role="main" class="main--is-review">
 	<form method="post" action="/review">
 		<ul class="flat-list review-list">
 		{% for task in tasks %}
