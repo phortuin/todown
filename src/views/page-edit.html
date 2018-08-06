@@ -1,5 +1,4 @@
 {% extends "views/_base.html" %}
-{% from "components/editor/editor.html" import editor %}
 {% from "components/header/header.html" import header %}
 
 {% block content %}
@@ -7,7 +6,10 @@
 	{{ header('Editing “' + page.title + '”') }}
 	<form action="/pages/{{ page.id }}" method="post" id="edit-page">
 		<input type="hidden" name="_method" value="PATCH">
-		{{ editor(page.content) }}
+		<textarea
+			autofocus
+			class="textarea"
+			name="content">{{ page.content }}</textarea>
 	</form>
 </main>
 

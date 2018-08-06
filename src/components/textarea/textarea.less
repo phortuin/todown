@@ -1,0 +1,30 @@
+.textarea {
+	display: block;
+	width: 100%;
+	height: calc(100vh - 10rem);
+	padding: 0 @margin-default;
+	border: 0;
+	outline: none;
+	font-family: "iA Writer Duospace", Menlo, monospace;
+	font-size: 14/16em;
+	-webkit-appearance: none;
+	resize: none;
+	border-radius: 0;
+}
+
+.textarea--small {
+	height: calc(82vh - 10rem);
+}
+
+.textarea--action {
+	padding: @margin-default;
+	font-size: 13/16em; // 0.8 is possibly the lowest size that ios won't zoom in to
+	line-height: 1.2;
+	background: @white-almost;
+	margin-bottom: @margin-default;
+	flex: 1;
+
+	&:focus {
+		background: @yellow-bright;
+	}
+}

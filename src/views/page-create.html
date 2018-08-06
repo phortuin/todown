@@ -1,12 +1,15 @@
 {% extends "views/_base.html" %}
-{% from "components/editor/editor.html" import editor %}
 {% from "components/header/header.html" import header %}
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
 	{{ header('New page') }}
 	<form action="/pages" method="post" id="create-page">
-		{{ editor() }}
+		<textarea
+			autofocus
+			class="textarea"
+			name="content"
+			placeholder="Fresh page here."></textarea>
 	</form>
 </main>
 
