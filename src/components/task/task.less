@@ -11,7 +11,7 @@
 .task--not-actionable .task__title {
 	font-size: 14/16em;
 	font-style: italic;
-	background: #ffb;
+	background: @yellow-faded;
 }
 
 .task input:checked ~ label .task__title {
@@ -91,6 +91,27 @@
 	}
 	input[type=checkbox]:disabled~label {
 		color: #999;
+	}
+
+}
+
+.task--today {
+
+	&:before {
+		content: "";
+		display: block;
+		position: absolute;
+		margin-left: -@margin-half;
+		margin-top: 0.125rem;
+		width: 1.5em;
+		height: 1em;
+		background: @yellow-bright;
+		border-radius: 0.25em;
+		transform: rotate(-25deg);
+	}
+
+	input[type=checkbox]:checked~label:before {
+		box-shadow: inset 0 0 0 0.125em @yellow-bright;
 	}
 
 }

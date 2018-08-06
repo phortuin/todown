@@ -21,4 +21,8 @@ function getScheduledHumanReadable() {
 	}
 }
 
-module.exports = { getTitleFromMarkdown, getScheduledHumanReadable }
+function getIsToday() {
+	return moment().startOf('day').isSame(this.scheduled_date)
+}
+
+module.exports = { getTitleFromMarkdown, getScheduledHumanReadable, getIsToday }

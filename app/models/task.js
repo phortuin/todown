@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { getTitleFromMarkdown, getScheduledHumanReadable } = require('../helpers')
+const { getTitleFromMarkdown, getScheduledHumanReadable, getIsToday } = require('../helpers')
 mongoose.Promise = require('bluebird');
 
 const TaskSchema = new mongoose.Schema({
@@ -23,6 +23,6 @@ TaskSchema.virtual('page', { // task lives on which page?
 	foreignField: 'tasks',
 	justOne: true // make sure it returns a single object, not an array
 });
-
+TaskSchema.virtual('is_today').get(getIsToday)
 
 module.exports = mongoose.model('Task', TaskSchema);
