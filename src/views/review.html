@@ -10,18 +10,14 @@
 		<ul class="flat-list review-list">
 		{% for task in tasks %}
 			{% set nextTaskId = tasks[loop.index0 + 1].id or 'submit' %}
-			<li id="task:{{ task.id }}">
-				<div class="review-list__item">
-					<h2 class="review-list__body">{{ task.title }}</h2>
-					{{ reviewActionBar(task.id, nextTaskId, ['done', 'delete', 'today', 'skip']) }}
-				</div>
+			<li id="task:{{ task.id }}" class="review-list__item">
+				<h2 class="review-list__body">{{ task.title }}</h2>
+				{{ reviewActionBar(task.id, nextTaskId, ['done', 'delete', 'today', 'skip']) }}
 			</li>
 		{% endfor %}
-			<li id="task:submit">
-				<div class="review-list__item">
-					<div class="review-list__body">
-						<button class="button" type="submit">Submit review</button>
-					</div>
+			<li id="task:submit" class="review-list__item">
+				<div class="review-list__body">
+					<button class="button" type="submit">Submit review</button>
 				</div>
 			</li>
 		</ul>
