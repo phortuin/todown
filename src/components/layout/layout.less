@@ -1,6 +1,6 @@
 main {
 	width: 100%;
-	padding: @margin-default * 4 @margin-default 0; // compensate for fixed header
+	padding: @header-height @margin-default 0; // compensate for fixed header
 	transition: filter 100ms ease-out, transform 200ms ease-out;
 	transform-origin: top center;
 
@@ -28,11 +28,6 @@ main {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-
-	li {
-		padding: 0;
-		margin-bottom: @margin-half;
-	}
 }
 
 .inline-list {

@@ -3,11 +3,12 @@
 	width: 100%;
 	top: 0;
 	left: 0;
-	padding: @margin-default;
+	padding: 3/4 * @margin-default @margin-default;
+	height: @header-height;
 	background: @white;
+	z-index: @z-index-high; // make review item transitions & absolute checkboxes go under header
 }
 
 .header--review {
 	box-shadow: 0 0 5em 3em white;
-	z-index: @z-index-high; // make review item transitions go under header
 }
