@@ -12,6 +12,7 @@
 	const actionBar = document.querySelector('[data-action]')
 	const reviewTaskInputs = toArray(document.querySelectorAll('[data-review-list] input, [data-review-list] [data-skip]'))
 	const modal = document.querySelector('[data-modal]')
+	const taskDeleters = toArray(document.querySelectorAll('[data-delete-task]'))
 
 	// helpers
 
@@ -83,6 +84,12 @@
 	modalClosers.forEach(modalCloser => modalCloser.addEventListener('click', closeModal))
 	modalOpeners.forEach(modalOpener => modalOpener.addEventListener('click', openModal))
 	sidebarOpeners.forEach(sidebarOpener => sidebarOpener.addEventListener('click', openSidebar))
+	taskDeleters.forEach(taskDeleter => taskDeleter.addEventListener('click', event => {
+		preventNavigationClick(event)
+		const id = event.currentTarget.id
+		const targetId = id.replace(/delete/, 'content')
+		document.getElementById(targetId).value = ''
+	}))
 
 	if (taskForm) {
 		const taskFormInputs = toArray(taskForm.elements)
