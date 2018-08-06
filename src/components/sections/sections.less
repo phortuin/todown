@@ -1,11 +1,16 @@
 .sections {
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	padding: @margin-default @margin-default * 2;
+	padding: @margin-default * 2;
+}
+
+.sections__list {
+	li {
+		margin-bottom: @margin-half;
+	}
 }
 
 .sections__link {
 	text-decoration: none;
-	color: @black;
+	color: @white;
 	font-weight: 500;
+	-webkit-font-smoothing: antialiased;
 }
