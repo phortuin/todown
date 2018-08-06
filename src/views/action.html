@@ -1,0 +1,33 @@
+{% extends "views/_base.html" %}
+{% from "components/header/header.html" import header %}
+{% from "components/review-action-bar/review-action-bar.html" import reviewActionBar %}
+
+{% block content %}
+{{ header('Action') }}
+<main role="main" class="main main--is-review">
+	<form method="post" action="/action?redirect=/tasks">
+		<ul class="flat-list review-list">
+		{% for task in tasks %}
+			{% set nextTaskId = tasks[loop.index0 + 1].id or 'submit' %}
+			<li id="task:{{ task.id }}" class="review-list__item">
+				<div class="review-list__body">
+					<textarea
+						id="task:{{ task.id }}:content"
+						name="{{ task.id }}-content"
+						placeholder="(Will be deleted)"
+						class="textarea textarea--action">{{ task.content }}</textarea>
+				</div>
+				{{ reviewActionBar(task.id, nextTaskId, ['delete', 'next']) }}
+			</li>
+		{% endfor %}
+			<li id="task:submit">
+				<div class="review-list__item">
+					<div class="review-list__body">
+						<button class="button" type="submit">Submit actions</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</form>
+</main>
+{% endblock %}
