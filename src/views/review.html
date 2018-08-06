@@ -1,8 +1,5 @@
 {% extends "views/_base.html" %}
-{% from "components/action/action.html" import action %}
-{% from "components/create-task/create-task.html" import createTask %}
 {% from "components/header/header.html" import header %}
-{% from "components/task/task.html" import task %}
 
 {% block content %}
 {{ header('Review', variant = 'review') }}
@@ -17,15 +14,15 @@
 					<h2 class="review-list__body">{{ task.title }}</h2>
 					<ul data-review-list class="flat-list inline-list review-list__action">
 						<li>
-							<input type="checkbox" name="{{ task.id }}-done" id="task:{{ task.id }}:done" data-next-task-id="task:{{ nextTaskId }}">
+							<input type="checkbox" class="a11y-sr-only" name="{{ task.id }}-done" id="task:{{ task.id }}:done" data-next-task-id="task:{{ nextTaskId }}">
 							<label for="task:{{ task.id }}:done">Done</label>
 						</li>
 						<li>
-							<input type="checkbox" name="{{ task.id }}-delete" id="task:{{ task.id }}:delete" data-next-task-id="task:{{ nextTaskId }}">
+							<input type="checkbox" class="a11y-sr-only" name="{{ task.id }}-delete" id="task:{{ task.id }}:delete" data-next-task-id="task:{{ nextTaskId }}">
 							<label for="task:{{ task.id }}:delete">Delete</label>
 						</li>
 						<li>
-							<input type="checkbox" name="{{ task.id }}-today" id="task:{{ task.id }}:today" data-next-task-id="task:{{ nextTaskId }}">
+							<input type="checkbox" class="a11y-sr-only" name="{{ task.id }}-today" id="task:{{ task.id }}:today" data-next-task-id="task:{{ nextTaskId }}">
 							<label for="task:{{ task.id }}:today">Today</label>
 						</li>
 						<li>

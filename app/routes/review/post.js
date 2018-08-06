@@ -7,15 +7,15 @@ module.exports = (req, res, next) => {
 		.map(task => {
 			if (req.body[`${task.id}-done`] === 'on') {
 				task.is_done = true
-				task.save()
+				return task.save()
 			}
 			if (req.body[`${task.id}-delete`] === 'on') {
-				task.remove()
+				return task.remove()
 			}
 			if (req.body[`${task.id}-today`] === 'on') {
 				task.scheduled_date = moment().startOf('day')
 				redirectTarget = '/today'
-				task.save()
+				return task.save()
 			}
 			return task
 		})
