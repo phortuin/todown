@@ -1,14 +1,46 @@
 .task {
 	display: flex;
 	justify-content: flex-start;
+	margin-bottom: @margin-half;
 }
 
-.task label {
+.task--not-actionable input[type=checkbox]~label:before {
+	visibility: hidden;
+}
+
+.task--not-actionable .task__title {
+	font-size: 14/16em;
+	font-style: italic;
+	background: #ffb;
+}
+
+.task input:checked ~ label .task__title {
+	background: @yellow-bright;
+}
+
+.task__label {
 	word-break: break-word;
 	flex-grow: 1;
+	padding-right: @margin-half;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
 }
 
 .task__link {
-	color: @red;
+	display: flex;
+	padding: 0 0.25em;
+	background: @white-almost;
+	color: @grey;
+	font-weight: 700;
 	text-decoration: none;
+	border-radius: @border-radius;
+	align-items: center;
+	margin-right: -@margin-default / 3;
+}
+
+.task__title--done {
+	color: @grey;
+	text-decoration: line-through;
 }
