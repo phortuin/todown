@@ -1,0 +1,13 @@
+{% macro reviewActionControl(id, nextId, name) %}
+<li>
+	<input
+		type="checkbox"
+		class="a11y-sr-only"
+		name="{{ id }}-{{ name }}"
+		id="task:{{ id }}:{{ name }}"
+		data-next-task-id="task:{{ nextId }}">
+	<label
+		class="review__action-control"
+		for="task:{{ id }}:{{ name }}">{{ name }}</label>
+</li>
+{% endmacro %}

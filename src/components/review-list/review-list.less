@@ -10,7 +10,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 100vh;
+	height: 100vh; // fix for ios?? viewport height is 'variable'
 }
 
 .review-list__body {
@@ -20,20 +20,31 @@
 	font-weight: 400;
 	margin: 0;
 	word-break: break-word;
-	font-size: 24/16em;
+	font-size: 18/16em;
+	padding-top: @margin-default * 2;
 }
 
 .review-list__action {
 	flex: 0 1 auto;
-	background: @white-almost;
+	display: flex;
+	justify-content: space-between;
 	padding: @margin-default;
 	margin: 0 0 @margin-default;
+	background: @white-almost;
+	border-radius: 0.25em;
+}
 
-	li {
-		margin-left: @margin-half;
+.review-list__action input:checked ~ label {
+	font-weight: 700;
+	color: @red;
+}
 
-		&:first-child {
-			margin-left: 0;
-		}
+.review-list__action a {
+	text-decoration: none;
+	color: @black;
+
+	&:active {
+		font-weight: 700;
+		color: @blue;
 	}
 }
