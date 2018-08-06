@@ -3,9 +3,13 @@
 {% macro reviewActionBar(id, nextId, actions = []) %}
 <ul data-review-list class="flat-list inline-list review-list__action">
 	{% for action in actions %}
-		{% if action === 'skip' %}
+		{% if action === 'skip' or action === 'next' %}
 			<li>
-				<a data-skip data-next-task-id="task:{{ nextId }}" href="#task:{{ nextId }}">Skip</a>
+				<a
+					class="review-action__label"
+					data-skip
+					data-next-task-id="task:{{ nextId }}"
+					href="#task:{{ nextId }}">{{ action }}</a>
 			</li>
 		{% else %}
 			{{ reviewActionControl(id, nextId, action) }}

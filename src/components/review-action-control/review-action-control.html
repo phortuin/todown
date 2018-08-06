@@ -2,12 +2,13 @@
 <li>
 	<input
 		type="checkbox"
-		class="a11y-sr-only"
+		class="a11y-sr-only review-action__control"
 		name="{{ id }}-{{ name }}"
 		id="task:{{ id }}:{{ name }}"
+		data-{{ name }}-task
 		data-next-task-id="task:{{ nextId }}">
 	<label
-		class="review__action-control"
+		class="review-action__label"
 		for="task:{{ id }}:{{ name }}">{{ name }}</label>
 </li>
 {% endmacro %}

@@ -1,3 +1,17 @@
-.review__action-control {
+.review-action__control {
+	outline: none;
+	border-radius: 0.25em;
+
+	&:focus~label {
+		text-decoration: underline;
+	}
+}
+
+.review-action__label {
 	text-transform: capitalize;
+	outline: none;
+
+	&:focus {
+		text-decoration: underline;
+	}
 }
