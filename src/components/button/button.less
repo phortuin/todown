@@ -1,7 +1,7 @@
 .button {
 	display: inline-block;
-	border: 2px solid @blue;
-	border-radius: 0.25em;
+	border: 2px solid @black;
+	border-radius: @border-radius;
 	padding: @margin-half @margin-default;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -9,7 +9,7 @@
 	font-size: 13/16em;
 	font-weight: 500;
 	background: transparent;
-	color: @blue;
+	color: @black;
 
 	& + .button {
 		margin-left: @margin-half;
@@ -17,7 +17,7 @@
 }
 
 .button--primary {
-	background: @blue;
+	background: @black;
 	color: @white;
 	-webkit-font-smoothing: antialiased;
 	font-weight: 600;

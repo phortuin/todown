@@ -2,11 +2,11 @@
 <div
 	class="action" data-action>
 	<div id="action-default">
-		<a class="button button--secondary" data-trigger-modal href="/create">Add task</a>
+		<a class="button" data-trigger-modal href="/create">Add task</a>
 	</div>
 	<div id="action-bulk" hidden>
 		<button class="button button--primary" type="submit" name="_action" value="done" form="{{ formId }}">Done.</button>
-		<button class="button button--secondary" type="submit" name="_action" value="{{ secondary.value }}" form="{{ formId }}">{{ secondary.label }}</button>
+		<button class="button" type="submit" name="_action" value="{{ secondary.value }}" form="{{ formId }}">{{ secondary.label }}</button>
 	</div>
 </div>
 {% endmacro %}
