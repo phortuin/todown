@@ -6,7 +6,7 @@
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
-	{{ header('All tasks') }}
+	{{ header('Tasks') }}
 	<section>
 		<form method="post" action="/tasks?redirect=/tasks" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">
