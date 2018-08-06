@@ -24,6 +24,12 @@
 		</form>
 		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 			<input type="hidden" name="_method" value="patch">
+			<input type="hidden" name="_action" value="actionable">
+			<input type="checkbox" name="is_actionable" id="{{ task.id }}__is_actionable" {% if task.is_actionable %}checked{% endif %}>
+			<label for="{{ task.id }}__is_actionable">Task is actionable</label>
+		</form>
+		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
+			<input type="hidden" name="_method" value="patch">
 			<input type="hidden" name="_action" value="done">
 			<input type="checkbox" name="is_done" id="{{ task.id }}__is_done" {% if task.is_done %}checked{% endif %}>
 			<label for="{{ task.id }}__is_done">Task is done</label>

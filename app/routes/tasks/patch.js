@@ -12,6 +12,12 @@ module.exports = (req, res, next) => {
 			if (req.body._action === 'done' && !req.body.is_done) {
 				task.is_done = false
 			}
+			if (req.body.is_actionable) {
+				task.is_actionable = true
+			}
+			if (req.body._action === 'actionable' && !req.body.is_actionable) {
+				task.is_actionable = false
+			}
 			if (req.body.scheduled_date) {
 				switch (req.body.scheduled_date) {
 					case 'today':
