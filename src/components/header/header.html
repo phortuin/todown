@@ -1,7 +1,15 @@
-{% from "components/title/title.html" import title as _title %}
-
 {% macro header(title, section, variant) %}
 <header role="banner" class="header{% if variant %} header--{{ variant }}{% endif %}">
-	{{ _title(title, section) }}
+	<h1
+		class="title">
+		<a class="title__header title__menu-opener" data-open-sidebar href="/sections">☰</a>
+		{% if section and title %}
+			<a class="title__header" href="{{ section.url }}">{{ section.name }}</a> / <em>{{ title }}</em>
+		{% elseif section %}
+			<a class="title__header" href="{{ section.url }}">{{ section.name }}</a>
+		{% else %}
+			{{ title }}
+		{% endif %}
+	</h1>
 </header>
 {% endmacro %}
