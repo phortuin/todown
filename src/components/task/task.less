@@ -4,14 +4,26 @@
 	margin-bottom: @margin-half;
 }
 
-.task--not-actionable input[type=checkbox]~label:before {
+.task--not-actionable input[type=checkbox]~label:before,
+.task--done input[type=checkbox]~label:before {
 	visibility: hidden;
 }
 
-.task--not-actionable .task__title {
+.task--not-actionable .task__title,
+.task--done .task__title {
 	font-size: 14/16em;
+}
+
+.task--not-actionable .task__title {
 	font-style: italic;
 	background: @yellow-faded;
+}
+
+.task--done .task__title {
+	color: @grey;
+	text-decoration: line-through;
+	background: transparent;
+	font-style: normal;
 }
 
 .task input:checked ~ label .task__title {
@@ -38,13 +50,6 @@
 	border-radius: @border-radius;
 	align-items: center;
 	margin-right: -@margin-default / 3;
-}
-
-.task--done .task__title {
-	color: @grey;
-	text-decoration: line-through;
-	background: transparent;
-	font-style: normal;
 }
 
 .task {
