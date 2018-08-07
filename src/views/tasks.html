@@ -6,7 +6,11 @@
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
-	{{ header('Tasks') }}
+	{% if query is undefined %}
+		{{ header('Tasks') }}
+	{% else %}
+		{{ header(query or 'Everything', section = { name: 'Tasks', url: '/tasks' }) }}
+	{% endif %}
 	<section>
 		<form method="post" action="/tasks?redirect=/tasks" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">

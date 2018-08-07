@@ -1,5 +1,4 @@
 @import (once) "components/action/action";
-@import (once) "components/textarea/textarea";
 @import (once) "components/button/button";
 @import (once) "components/header/header";
 @import (once) "components/helpers/helpers";
@@ -12,6 +11,8 @@
 @import (once) "components/sidemenu/sidemenu";
 @import (once) "components/sections/sections";
 @import (once) "components/task/task";
+@import (once) "components/text-input/text-input";
+@import (once) "components/textarea/textarea";
 @import (once) "components/title/title";
 @import (once) "components/typography/typography";
 
@@ -34,7 +35,7 @@
 @margin-half: @margin-default / 2;
 
 @box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.25);
-@border-radius: 0.25em;
+@border-radius: 0.25rem;
 @header-height: 3.125rem;
 
 @z-index-high: 1;
@@ -56,6 +57,7 @@ button {
 	font-family: "IBM Plex Sans","Rubik",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans",sans-serif;
 	line-height: 1.4;
 	-webkit-text-size-adjust: 100%;
+	-webkit-appearance: none;
 	font-feature-settings: "kern", "liga";//, "ss01", "ss02"; //01 = open a, 02 = open g
 }
 
