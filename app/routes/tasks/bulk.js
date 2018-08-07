@@ -7,13 +7,13 @@ module.exports = (req, res, next) => {
 			if (req.body[`${task.id}__task`] === 'on') {
 				switch (req.body._action) {
 					case 'done':
-						task.is_done = true
+						task.setDone()
 						break
 					case 'not_today':
 						task.scheduled_date = null
 						break
 					case 'today':
-						task.scheduled_date = moment().startOf('day')
+						task.setToday()
 						break
 				}
 			}

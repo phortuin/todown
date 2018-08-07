@@ -6,14 +6,14 @@ module.exports = (req, res, next) => {
 	Task.find({ is_done: {$ne: true} }).exec()
 		.map(task => {
 			if (req.body[`${task.id}-done`] === 'on') {
-				task.is_done = true
+				task.setDone()
 				return task.save()
 			}
 			if (req.body[`${task.id}-delete`] === 'on') {
 				return task.remove()
 			}
 			if (req.body[`${task.id}-today`] === 'on') {
-				task.scheduled_date = moment().startOf('day')
+				task.setToday()
 				redirectTarget = '/today'
 				return task.save()
 			}

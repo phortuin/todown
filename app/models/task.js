@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment')
 const { getTitleFromMarkdown, getScheduledHumanReadable, getIsToday } = require('../helpers')
 mongoose.Promise = require('bluebird');
 
@@ -24,5 +25,21 @@ TaskSchema.virtual('page', { // task lives on which page?
 	justOne: true // make sure it returns a single object, not an array
 });
 TaskSchema.virtual('is_today').get(getIsToday)
+
+TaskSchema.methods.setDone = function() {
+	this.is_done = true
+	this.is_actionable = true
+	this.scheduled_date = null
+}
+
+TaskSchema.methods.setToday = function() {
+	this.scheduled_date = moment().startOf('day')
+	this.is_actionable = true
+}
+
+TaskSchema.methods.setTomorrow = function() {
+	this.scheduled_date = moment().add(1, 'd').startOf('day')
+	this.is_actionable = true
+}
 
 module.exports = mongoose.model('Task', TaskSchema);

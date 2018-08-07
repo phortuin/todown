@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
 		.then(task => {
 			redirectTarget = `/tasks/${task.id}`
 			if (req.body.is_done) {
-				task.is_done = true
+				task.setDone()
 			}
 			if (req.body._action === 'done' && !req.body.is_done) {
 				task.is_done = false
@@ -21,11 +21,11 @@ module.exports = (req, res, next) => {
 			if (req.body.scheduled_date) {
 				switch (req.body.scheduled_date) {
 					case 'today':
-						task.scheduled_date = moment().startOf('day')
+						task.setToday()
 						redirectTarget = '/today'
 						break
 					case 'tomorrow':
-						task.scheduled_date = moment().add(1, 'd').startOf('day')
+						task.setTomorrow()
 						break
 					default:
 						task.scheduled_date = null
