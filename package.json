@@ -36,6 +36,7 @@
   },
   "now": {
     "alias": "todown",
+    "dotenv": ".env.production",
     "regions": [
       "bru"
     ]
