@@ -4,16 +4,15 @@
 {% block content %}
 <main class="main--has-action-bar" role="main">
 	{{ header(section = { url: '/tasks', name: 'Tasks'}) }}
-	<section>
-		{% if task.is_done %}<del>{% endif %}
+	<section
+		class="task__content{% if task.is_done %} task__content--done{% endif %}">
 			{{ task.content | markdown | safe }}
-		{% if task.is_done %}</del>{% endif %}
 	</section>
 </main>
 
 <div class="action" data-action>
-	<a href="/tasks/{{ task.id }}/edit" class="button">Edit.</a>
-	<a href="/tasks/{{ task.id }}/settings" class="button button--secondary" data-trigger-modal class="pull-right">Settings</a>
+	<a href="/tasks/{{ task.id }}/edit" class="button button--primary">Edit.</a>
+	<a href="/tasks/{{ task.id }}/settings" class="button" data-trigger-modal class="pull-right">Settings</a>
 </div>
 
 <section class="modal closed modal--small" data-modal hidden>
