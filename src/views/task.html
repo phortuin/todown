@@ -16,36 +16,41 @@
 	<a href="/tasks/{{ task.id }}/settings" class="button button--secondary" data-trigger-modal class="pull-right">Settings</a>
 </div>
 
-<section class="modal closed modal--small" id="task-settings" data-modal hidden>
+<section class="modal closed modal--small" data-modal hidden>
 	<div class="modal__body">
-		<form method="post" onsubmit="return confirm('Serious.ly')" action="/tasks/{{ task.id }}?redirect=/tasks">
-			<input type="hidden" name="_method" value="delete">
-			<button class="button">Delete?</button>
-		</form>
 		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 			<input type="hidden" name="_method" value="patch">
 			<input type="hidden" name="_action" value="actionable">
-			<input type="checkbox" name="is_actionable" id="{{ task.id }}__is_actionable" {% if task.is_actionable %}checked{% endif %}>
-			<label for="{{ task.id }}__is_actionable">Task is actionable</label>
+			<input type="checkbox" name="is_actionable" id="task:{{ task.id }}:actionable" {% if task.is_actionable %}checked{% endif %}>
+			<label for="task:{{ task.id }}:actionable">Actionable</label>
 		</form>
 		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 			<input type="hidden" name="_method" value="patch">
 			<input type="hidden" name="_action" value="done">
-			<input type="checkbox" name="is_done" id="{{ task.id }}__is_done" {% if task.is_done %}checked{% endif %}>
-			<label for="{{ task.id }}__is_done">Task is done</label>
+			<input type="checkbox" name="is_done" id="task:{{ task.id }}:done" {% if task.is_done %}checked{% endif %}>
+			<label for="task:{{ task.id }}:done">Done</label>
 		</form>
 		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 			<input type="hidden" name="_method" value="patch">
 			<ul class="flat-list inline-list">
 				<li>
-					<input type="radio" name="scheduled_date" id="{{ task.id }}_scheduled_date_today" value="today" name="scheduled_date" {% if task.scheduled_hr === 'today' %}checked{% endif %}>
-					<label for="{{ task.id }}_scheduled_date_today">Today</label>
+					<input type="radio" name="scheduled_date" id="task:{{ task.id }}:today" value="today" name="scheduled_date" {% if task.scheduled_hr === 'today' %}checked{% endif %}>
+					<label for="task:{{ task.id }}:today">Today</label>
 				</li>
 				<li>
-					<input type="radio" name="scheduled_date" id="{{ task.id }}_scheduled_date_tomorrow" value="tomorrow" name="scheduled_date" {% if task.scheduled_hr === 'tomorrow' %}checked{% endif %}>
-					<label for="{{ task.id }}_scheduled_date_tomorrow">Tomorrow</label>
+					<input type="radio" name="scheduled_date" id="task:{{ task.id }}:tomorrow" value="tomorrow" name="scheduled_date" {% if task.scheduled_hr === 'tomorrow' %}checked{% endif %}>
+					<label for="task:{{ task.id }}:tomorrow">Tomorrow</label>
 				</li>
 			</ul>
+		</form>
+		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
+			<input type="hidden" name="_method" value="patch">
+			<input type="hidden" name="_action" value="clear_date">
+			<button class="button">Clear date</button>
+		</form>
+		<form method="post" onsubmit="return confirm('Serious.ly')" action="/tasks/{{ task.id }}?redirect=/tasks">
+			<input type="hidden" name="_method" value="delete">
+			<button class="button button--secondary">Delete?</button>
 		</form>
 	</div>
 </section>

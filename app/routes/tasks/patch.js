@@ -35,6 +35,9 @@ module.exports = (req, res, next) => {
 			if (req.body.content) {
 				task.content = req.body.content
 			}
+			if (req.body._action === 'clear_date') {
+				task.scheduled_date = null
+			}
 			return task.save()
 		}).then(task => res.redirect(redirectTarget))
 		.catch(next)
