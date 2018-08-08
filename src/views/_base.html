@@ -3,10 +3,14 @@
 <!doctype html>
 <html>
 	<head>
+		<title>Todown</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Todown</title>
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+		<link rel="apple-touch-startup-image" href="/assets/launch.png">
 		<link rel="stylesheet" href="/index.css">
+		<link rel="manifest" href="/manifest.json">
 		<script src="/index.js" defer></script>
 	</head>
 	<body>
@@ -20,5 +24,19 @@
 			{{ sections() }}
 		</nav>
 
+		<script>
+			window.addEventListener('load', () => {
+				if ('serviceWorker' in navigator) {
+					navigator.serviceWorker.register('/service-worker.js')
+						.then(registration => navigator.serviceWorker.ready)
+						.then(registration => {
+							registration.update();
+						}).catch(err => {
+							console.log('Service worker wasn’t registered');
+							console.error(err);
+						});
+				}
+			});
+		</script>
 	</body>
 </html>

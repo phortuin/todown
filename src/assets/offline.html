@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Todown</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+		<link rel="apple-touch-startup-image" href="/assets/launch.png">
+		<link rel="stylesheet" href="/index.css">
+		<link rel="manifest" href="/manifest.json">
+		<script src="/index.js" defer></script>
+	</head>
+	<body>
+		<div class="overlay closed" hidden data-overlay></div>
+		<main class="main--has-action-bar" role="main">
+			<header role="banner" class="header">
+				<h1 class="title">
+					<a class="title__header title__menu-opener" data-open-sidebar="" href="/sections">☰</a>
+					Todown
+				</h1>
+			</header>
+			<center style="font-size: 0.875em">
+				<br>
+				<img style="height: 100px" src="/assets/robo-sleep.png">
+				<p>It seems you are offline!</p>
+				<p>You can try to use the sidemenu to reach other sections.</p>
+				<p><strong>Note</strong> that search is disabled, as is adding and editing content.</p>
+			</center>
+		</main>
+		<nav class="sidemenu closed" data-sidemenu hidden>
+			<section class="sections">
+				<ul class="flat-list sections__list">
+					<li>
+						<a class="sections__link" href="/today">Today</a>
+					</li>
+					<li>
+						<a class="sections__link" href="/tasks">Tasks</a>
+					</li>
+					<li>
+						<a class="sections__link" href="/pages">Pages</a>
+					</li>
+					<li>
+						<a class="sections__link" href="/review">Review</a>
+					</li>
+					<li>
+						<a class="sections__link" href="/action">Action</a>
+					</li>
+				</ul>
+			</section>
+		</nav>
+	</body>
+</html>
