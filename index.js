@@ -16,6 +16,7 @@ app.use(require('@lib/parse-method')) // Parses _method parameters to req.method
 
 app.get('/', (req, res) => res.redirect('/today'))
 app.use('/today', require('@routes/today'))
+app.use('/tomorrow', require('@routes/tomorrow'))
 app.use('/pages', require('@routes/pages'))
 app.use('/tasks', require('@routes/tasks'))
 app.use('/review', require('@routes/review'))
