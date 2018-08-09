@@ -26,6 +26,7 @@ module.exports = (req, res, next) => {
 						break
 					case 'tomorrow':
 						task.setTomorrow()
+						redirectTarget = '/tomorrow'
 						break
 					default:
 						task.scheduled_date = null

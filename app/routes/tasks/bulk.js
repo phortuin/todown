@@ -9,11 +9,14 @@ module.exports = (req, res, next) => {
 					case 'done':
 						task.setDone()
 						break
-					case 'not_today':
+					case 'clear_date':
 						task.scheduled_date = null
 						break
 					case 'today':
 						task.setToday()
+						break
+					case 'tomorrow':
+						task.setTomorrow()
 						break
 				}
 			}
