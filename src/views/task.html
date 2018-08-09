@@ -5,6 +5,7 @@
 <main class="main--has-action-bar" role="main">
 	{{ header(section = { url: '/tasks', name: 'Tasks'}) }}
 	<section
+		data-edit-task="{{ task.id }}"
 		class="task__content{% if task.is_done %} task__content--done{% endif %}">
 			{{ task.content | markdown | safe }}
 	</section>

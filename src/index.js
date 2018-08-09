@@ -13,6 +13,7 @@
 	const reviewTaskInputs = toArray(document.querySelectorAll('[data-review-list] input, [data-review-list] [data-skip]'))
 	const modal = document.querySelector('[data-modal]')
 	const taskDeleters = toArray(document.querySelectorAll('[data-delete-task]'))
+	const editTaskLink = document.querySelector('[data-edit-task]')
 
 	// helpers
 
@@ -90,6 +91,15 @@
 		const targetId = id.replace(/delete/, 'content')
 		document.getElementById(targetId).value = ''
 	}))
+
+	if (editTaskLink) {
+		editTaskLink.addEventListener('click', event => {
+			if (event.currentTarget.tagName !== 'A') {
+				let id = event.currentTarget.dataset.editTask
+				window.location.href = `/tasks/${id}/edit`
+			}
+		})
+	}
 
 	if (taskForm) {
 		const taskFormInputs = toArray(taskForm.elements)
