@@ -2,6 +2,12 @@
 {% from "components/header/header.html" import header %}
 {% from "components/review-action-bar/review-action-bar.html" import reviewActionBar %}
 
+{% if evening %}
+	{% set actions = ['done', 'delete', 'tomorrow', 'skip'] %}
+{% else %}
+	{% set actions = ['done', 'delete', 'today', 'skip'] %}
+{% endif %}
+
 {% block content %}
 <main role="main" class="main--is-review">
 	{{ header('Review', variant = 'review') }}
@@ -11,7 +17,7 @@
 			{% set nextTaskId = tasks[loop.index0 + 1].id or 'submit' %}
 			<li id="task:{{ task.id }}" class="review-list__item">
 				<h2 class="review-list__body">{{ task.title }}</h2>
-				{{ reviewActionBar(task.id, nextTaskId, ['done', 'delete', 'today', 'skip']) }}
+				{{ reviewActionBar(task.id, nextTaskId, actions) }}
 			</li>
 		{% endfor %}
 			<li id="task:submit" class="review-list__item">
