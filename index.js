@@ -1,10 +1,11 @@
 require('dotenv-safe').config()
 require('module-alias/register')
+require('moment-timezone').tz.setDefault('Europe/Amsterdam')
+
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
-const renderer = require('./lib/renderer');
 const Promise = require('bluebird');
 
 mongoose.Promise = require('bluebird');
