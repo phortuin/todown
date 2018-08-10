@@ -2,19 +2,19 @@ require('dotenv-safe').config()
 require('module-alias/register')
 require('moment-timezone').tz.setDefault('Europe/Amsterdam')
 
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+const express = require('express')
 const moment = require('moment')
-const express = require('express');
+const mongoose = require('mongoose')
+const mongoSanitize = require('express-mongo-sanitize')
+const Promise = require('bluebird')
 const renderer = require('@lib/renderer')
-const mongoose = require('mongoose');
-const mongoSanitize = require('express-mongo-sanitize');
-const Promise = require('bluebird');
 
-mongoose.Promise = require('bluebird');
+mongoose.Promise = require('bluebird')
 
-const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(mongoSanitize()); // Sanitize strings to prevent MongoDB Operator Injection
+const app = express()
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(mongoSanitize()) // Sanitize strings to prevent MongoDB Operator Injection
 app.use(require('@lib/parse-method')) // Parses _method parameters to req.method
 
 // @todo perf implications? looks like lib/renderer gets cached upon build by Now;
@@ -33,18 +33,18 @@ app.use('/review', require('@routes/review'))
 app.use('/action', require('@routes/action'))
 app.use('/sections', require('@routes/sections'))
 
-app.use(express.static('static/'));
+app.use(express.static('static/'))
 
 // Error
 app.use((err, req, res, next) => {
 	if (app.get('env') === 'development') {
-		console.error(err);
+		console.error(err)
 	}
-	res.status(err.status || 500).send(err.message || 'Internal Server Error');
-});
+	res.status(err.status || 500).send(err.message || 'Internal Server Error')
+})
 
 // Not found
-app.use((req, res, next) => res.status(404).send('404'));
+app.use((req, res, next) => res.status(404).send('404'))
 
 // $RUN
 mongoose.connect(`${process.env.MONGO_URI}`, { useNewUrlParser: true })
@@ -52,11 +52,11 @@ mongoose.connect(`${process.env.MONGO_URI}`, { useNewUrlParser: true })
 		const port = process.env.PORT || 3006
 		app.listen(port, () => {
 			if (app.get('env') === 'development') {
-				console.log('Development server available on http://localhost:' + port);
+				console.log('Development server available on http://localhost:' + port)
 			}
-		});
+		})
 	})
 	.catch(err => {
-		console.error(err);
-		process.exit(1);
-	});
+		console.error(err)
+		process.exit(1)
+	})
