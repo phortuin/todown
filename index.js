@@ -3,7 +3,9 @@ require('module-alias/register')
 require('moment-timezone').tz.setDefault('Europe/Amsterdam')
 
 const bodyParser = require('body-parser');
+const moment = require('moment')
 const express = require('express');
+const renderer = require('@lib/renderer')
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 const Promise = require('bluebird');
@@ -15,6 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(mongoSanitize()); // Sanitize strings to prevent MongoDB Operator Injection
 app.use(require('@lib/parse-method')) // Parses _method parameters to req.method
 
+// @todo perf implications? looks like lib/renderer gets cached upon build by Now;
+// is it possible to exclude it from cache? also, if this snippet goes into
+// a separate module, it will probably be cached as well. Leave it in for now
+app.use('*', (req, res, next) => {
+	renderer.addGlobal('evening', moment().isAfter(moment({ hour: 20 })))
+	return next()
+})
 app.get('/', (req, res) => res.redirect('/today'))
 app.use('/today', require('@routes/today'))
 app.use('/tomorrow', require('@routes/tomorrow'))
