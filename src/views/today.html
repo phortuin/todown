@@ -19,7 +19,11 @@
 		</form>
 	</section>
 </main>
-{{ action(secondary = { value: 'clear_date', label: 'Not today.' }) }}
+{% if evening %}
+	{{ action(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
+{% else %}
+	{{ action(secondary = { value: 'clear_date', label: 'Not today.' }) }}
+{% endif %}
 {% endblock %}
 
 {% block modals %}
