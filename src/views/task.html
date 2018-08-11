@@ -3,7 +3,11 @@
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
+	{% if task.is_today %}
+	{{ header(section = { url: '/today', name: 'Today'}) }}
+	{% else %}
 	{{ header(section = { url: '/tasks', name: 'Tasks'}) }}
+	{% endif %}
 	<section
 		data-edit-task="{{ task.id }}"
 		class="task__content{% if task.is_done %} task__content--done{% endif %}">
