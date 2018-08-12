@@ -3,8 +3,8 @@
 {% from "components/review-action-bar/review-action-bar.html" import reviewActionBar %}
 
 {% block content %}
+{{ header('Action') }}
 <main role="main" class="main main--is-review">
-	{{ header('Action') }}
 	<form method="post" action="/action?redirect=/tasks">
 		<ul class="flat-list review-list">
 		{% for task in tasks %}
