@@ -2,10 +2,20 @@ const Page = require('@models/page')
 const moment = require('moment')
 
 module.exports = (req, res, next) => {
+	let redirectTarget
 	Page.findById(req.params.id).exec()
 		.then(page => {
-			page.content = req.body.content
+			redirectTarget = `/pages/${page.id}`
+			if (req.body._action === 'sticky' && !req.body.is_sticky) {
+				page.is_sticky = false
+			}
+			if (req.body.is_sticky) {
+				page.is_sticky = true
+			}
+			if (req.body.content) {
+				page.content = req.body.content
+			}
 			return page.save()
-		}).then(page => res.redirect(`/pages/${page.id}`))
+		}).then(page => res.redirect(redirectTarget))
 		.catch(next)
 }

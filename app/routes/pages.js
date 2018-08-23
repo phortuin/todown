@@ -12,6 +12,7 @@ router.route('/create')
 router.route('/:id')
 	.get(require('@routes/pages/get'))
 	.patch(require('@routes/pages/patch'))
+	.delete(require('@routes/pages/delete'))
 
 router.route('/:id/edit')
 	.get(require('@routes/pages/edit'))

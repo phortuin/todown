@@ -17,9 +17,11 @@
 
 <div class="action" data-action>
 	<a href="/tasks/{{ task.id }}/edit" class="button button--primary">Edit.</a>
-	<a href="/tasks/{{ task.id }}/settings" class="button" data-trigger-modal class="pull-right">Settings</a>
+	<a href="/tasks/{{ task.id }}/settings" class="button pull-right" data-trigger-modal>Settings.</a>
 </div>
+{% endblock %}
 
+{% block modal %}
 <section class="modal closed modal--small" data-modal hidden>
 	<div class="modal__body">
 		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
