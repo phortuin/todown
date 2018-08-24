@@ -19,7 +19,7 @@
     "dev:watch": "run-p watch:*",
     "start": "node index.js",
     "test": "ava --verbose",
-    "watch:assets": "chokidar 'src/assets/*' --command 'npm run build:assets'",
+    "watch:assets": "chokidar 'src/assets/**/*' --command 'npm run build:assets'",
     "watch:css": "chokidar 'src/**/*.less' --command 'npm run build:css'",
     "watch:js": "chokidar 'src/**/*.js' --command 'npm run build:js'",
     "watch:manifest": "chokidar 'src/manifest.json' --command 'npm run build:manifest'",

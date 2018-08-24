@@ -23,3 +23,6 @@ static
 # environment variables
 .env
 .env.production
+
+# (commercial) fonts
+src/assets/fonts
