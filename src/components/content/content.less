@@ -1,0 +1,264 @@
+.content {
+	h1 {
+		font-size: 3em;
+		font-weight: 700;
+		letter-spacing: -2px;
+		padding: 0;
+		margin: 0 0 @margin-default -4px;
+		line-height: 1.1;
+	}
+
+	h2 {
+		font-size: 1em;
+		font-weight: 700;
+		padding: 0;
+		margin: 0;
+
+		a {
+			color: @black;
+			text-decoration: none;
+		}
+	}
+
+	li, p {
+		font-size: 1em;
+		margin: 0 0 @margin-default;
+	}
+
+	li {
+		margin-bottom: @margin-default / 4;
+	}
+
+	li p, li h2 {
+		font-size: 1em;
+	}
+
+	blockquote {
+		margin: @margin-default * 2 0;
+		padding: 0 @margin-default;
+		font-style: italic;
+
+		p:last-child {
+			margin-bottom: 0;
+		}
+
+		&:before {
+			display: block;
+			content: " ";
+			width: 10%;
+			margin-bottom: @margin-default;
+			border-top: 2px solid @black;
+		}
+
+		&:after {
+			display: block;
+			content: " ";
+			clear: both;
+		}
+
+		cite {
+			font-size: 14/16em;
+			float: right;
+		}
+	}
+
+	cite:before {
+		content: "—";
+	}
+
+	pre {
+		line-height: 1.35;
+		margin: 0 0 @margin-default;
+		background: @black;
+		padding: @margin-default;
+		border-radius: 0.1875em;
+		word-wrap: break-word;
+		overflow: scroll;
+
+		p + & {
+			margin-top: @margin-default;
+		}
+
+		span { /** for syntax highlighting */
+			word-wrap: break-word;
+		}
+
+		code {
+			font-size: 13/16em;
+			padding: 0;
+			color: @white-almost;
+			background: transparent;
+			border: none;
+			border-radius: none;
+			-webkit-font-smoothing: antialiased;
+		}
+
+	}
+
+	h2 + pre {
+		margin-top: @margin-default / 2;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	ul {
+		margin: @margin-half 0 @margin-default @margin-half;
+		padding: 0 0 0 @margin-default;
+
+		@media @m {
+			padding: 0 0 0 @margin-default;
+		}
+	}
+
+	ul li {
+		padding: 0;
+	}
+
+	ol {
+		margin: 0 0 @margin-half @margin-default * 1.5;
+		padding: 0;
+	}
+
+	code {
+		font-family: "IBM Plex Mono", Menlo, 'Lucida Console', monospace;
+		font-size: 13/16em;
+	}
+
+	p > code, li > code {
+		display: inline-block;
+		background: @white-almost;
+		padding: 0.125em 0.25em 0;
+		border-radius: 0.25em;
+		vertical-align: 0.0625em;
+		color: @red;
+	}
+
+	hr {
+		margin-top: @margin-default * 2;
+		border: 0;
+		height: 1px;
+		background: @black;
+
+		& + ol {
+			min-height: 40em;
+		}
+	}
+
+	sup {
+		line-height: 1;
+
+		a {
+			color: @accent;
+			text-decoration: underline;
+		}
+	}
+
+	strong {
+		font-weight: 500;
+	}
+
+	/** Prism */
+
+	.token.comment,
+	.token.prolog,
+	.token.doctype,
+	.token.cdata {
+		color: @grey;
+	}
+
+	.token.punctuation {
+		color: @white-almost;
+	}
+
+	.namespace {
+		color: @red;
+	}
+
+	.token.property {
+		color: @cyan;
+	}
+
+	.token.constant,
+	.token.symbol,
+	.token.deleted {
+		color: @green;
+	}
+
+	.token.boolean,
+	.token.number {
+		color: @red;
+	}
+
+	.token.tag {
+		color: @red;
+	}
+
+	.token.selector {
+		color: @green;
+	}
+
+	.token.attr-name {
+		color: @green;
+	}
+
+	.token.string {
+		color: @yellow;
+	}
+
+	.token.char,
+	.token.builtin,
+	.token.inserted {
+		color: @cyan;
+	}
+
+	.token.operator,
+	.token.entity,
+	.token.url,
+	.language-css .token.string,
+	.style .token.string,
+	.token.variable {
+		color: @yellow;
+	}
+
+	.token.atrule,
+	.token.attr-value {
+		color: @yellow;
+	}
+
+	.token.function {
+		color: @green;
+	}
+
+	.token.keyword {
+		color: @cyan;
+	}
+
+	.token.regex {
+		color: @red;
+	}
+
+	.token.important {
+		color: @cyan;
+	}
+
+	.token.regex {
+		font-style: italic;
+	}
+
+	.token.important,
+	.token.bold {
+		font-weight: 700;
+	}
+
+	.token.italic {
+		font-style: italic;
+	}
+
+	.token.entity {
+		cursor: help;
+	}
+
+}

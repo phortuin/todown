@@ -10,7 +10,7 @@
 	{% endif %}
 	<section
 		data-edit-task="{{ task.id }}"
-		class="task__content{% if task.is_done %} task__content--done{% endif %}">
+		class="content task__content{% if task.is_done %} task__content--done{% endif %}">
 			{{ task.content | markdown | safe }}
 	</section>
 </main>
