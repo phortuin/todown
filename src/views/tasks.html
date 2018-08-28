@@ -1,7 +1,7 @@
 {% extends "views/_base.html" %}
 {% from "components/action/action.html" import action %}
-{% from "components/create-task/create-task.html" import createTask %}
 {% from "components/header/header.html" import header %}
+{% from "components/new-item-modal/new-item-modal.html" import newItemModal %}
 {% from "components/task/task.html" import task %}
 
 {% block content %}
@@ -30,5 +30,5 @@
 {% endblock %}
 
 {% block modal %}
-{{ createTask() }}
+{{ newItemModal('task') }}
 {% endblock %}

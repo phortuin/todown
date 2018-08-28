@@ -1,11 +1,11 @@
-{% macro createPage() %}
+{% macro newItemModal(itemType) %}
 <section class="modal closed" data-modal hidden>
 	<div class="modal__body">
 		<form
 			class="modal__form"
-			action="/pages"
+			action="/{{ itemType }}s"
 			method="post"
-			id="create-page">
+			id="create-{{ itemType }}">
 			<textarea
 				class="textarea textarea--in-modal"
 				name="content"
@@ -15,10 +15,10 @@
 			<button
 				type="submit"
 				class="button"
-				form="create-page">Create page.</button>
+				form="create-{{ itemType }}">Create {{ itemType }}.</button>
 			&nbsp;or
 			<a
-				href="/tasks"
+				href="/{{ itemType }}s"
 				data-close-modal>Cancel</a>
 		</div>
 	</div>

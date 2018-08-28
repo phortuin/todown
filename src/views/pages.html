@@ -1,7 +1,7 @@
 {% extends "views/_base.html" %}
-{% from "components/create-page/create-page.html" import createPage %}
 {% from "components/header/header.html" import header %}
 {% from "components/page/page.html" import page %}
+{% from "components/new-item-modal/new-item-modal.html" import newItemModal %}
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
@@ -20,5 +20,5 @@
 {% endblock %}
 
 {% block modal %}
-{{ createPage() }}
+{{ newItemModal('page') }}
 {% endblock %}
