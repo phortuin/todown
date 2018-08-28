@@ -1,4 +1,5 @@
 {% extends "views/_base.html" %}
+{% from "components/create-page/create-page.html" import createPage %}
 {% from "components/header/header.html" import header %}
 {% from "components/page/page.html" import page %}
 
@@ -14,6 +15,10 @@
 	</section>
 </main>
 <div class="action" data-action>
-	<a href="/pages/create" class="button button--secondary">Create page</a>
+	<a class="button" data-trigger-modal href="/pages/create" >Create page</a>
 </div>
+{% endblock %}
+
+{% block modal %}
+{{ createPage() }}
 {% endblock %}
