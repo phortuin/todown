@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block modal %}
-<section class="modal closed modal--small" data-modal hidden>
+<section class="modal closed" data-modal hidden>
 	<div class="modal__body">
 		<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 			<input type="hidden" name="_method" value="patch">
