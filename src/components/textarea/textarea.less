@@ -2,7 +2,7 @@
 	display: block;
 	width: 100%;
 	height: calc(100vh - 10rem);
-	padding: 0 @margin-default;
+	padding: 0;
 	border: 0;
 	outline: none;
 	font-family: "iA Writer Duospace", "IBM Plex Mono", Menlo, monospace;
@@ -12,8 +12,10 @@
 	border-radius: 0;
 }
 
-.textarea--small {
-	height: calc(82vh - 10rem);
+.textarea--in-modal {
+	height: auto;
+	flex: 1;
+	padding: 0;
 }
 
 .textarea--action {

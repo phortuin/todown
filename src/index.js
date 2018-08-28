@@ -71,11 +71,19 @@
 		transitAndAddHidden(actionBar)
 		removeHiddenAndTransit(overlay)
 		removeHiddenAndTransit(modal)
+		setEditorFocus()
 	}
 
 	function openSidebar(event) {
 		preventNavigationClick(event)
 		removeHiddenAndTransit(sidemenuEl)
+	}
+
+	function setEditorFocus() {
+		let textarea = modal.querySelector('textarea')
+		if (textarea) {
+			textarea.focus()
+		}
 	}
 
 	// handlers

@@ -1,6 +1,6 @@
 .modal {
 	position: fixed;
-	height: 75vh;
+	height: @iphone-se-pwa-viewport-height;
 	width: 100%;
 	left: 0;
 	bottom: 0;
@@ -16,9 +16,21 @@
 	height: 35vh;
 }
 
+.modal__title {
+	font-weight: bold;
+}
+
+.modal__form {
+	display: flex;
+	flex-grow: 1;
+	margin-bottom: @margin-default;
+}
+
 .modal__body {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
 	height: 100%;
 	padding: @margin-default;
 	background: @white;
 }
-

@@ -3,7 +3,7 @@
 
 	h1 {
 		font-size: 3em;
-		font-weight: 700;
+		font-weight: bold;
 		letter-spacing: -2px;
 		padding: 0;
 		margin: 0 0 @margin-default -4px;
@@ -12,7 +12,7 @@
 
 	h2 {
 		font-size: 1em;
-		font-weight: 700;
+		font-weight: bold;
 		padding: 0;
 		margin: 0;
 
@@ -36,7 +36,7 @@
 	}
 
 	blockquote {
-		margin: @margin-default * 2 0;
+		margin: @margin-double 0;
 		padding: 0 @margin-default;
 		font-style: italic;
 
@@ -98,7 +98,7 @@
 	}
 
 	h2 + pre {
-		margin-top: @margin-default / 2;
+		margin-top: @margin-half;
 	}
 
 	img {
@@ -139,7 +139,7 @@
 	}
 
 	hr {
-		margin-top: @margin-default * 2;
+		margin-top: @margin-double;
 		border: 0;
 		height: 1px;
 		background: @black;
@@ -159,7 +159,7 @@
 	}
 
 	strong {
-		font-weight: 500;
+		font-weight: @font-weight-m;
 	}
 
 	/** Prism */
@@ -252,7 +252,7 @@
 
 	.token.important,
 	.token.bold {
-		font-weight: 700;
+		font-weight: bold;
 	}
 
 	.token.italic {
