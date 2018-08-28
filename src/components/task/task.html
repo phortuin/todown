@@ -1,6 +1,10 @@
 {% macro task(task) %}
 <li class="task{% if not task.is_actionable %} task--not-actionable{% endif %}{% if task.is_today %} task--today{% endif %}{% if task.is_done %} task--done{% endif %}">
-	<input type="checkbox" id="{{ task.id }}__task" name="{{ task.id }}__task">
+	<input
+		class="a11y-sr-only"
+		type="checkbox"
+		id="{{ task.id }}__task"
+		name="{{ task.id }}__task">
 	<label class="task__label" for="{{ task.id }}__task">
 		<span class="task__title">
 			{% if task.content %}{{ task.title | titleize | safe }}{% else %}(Untitled){% endif %}

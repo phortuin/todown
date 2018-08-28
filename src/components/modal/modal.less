@@ -12,6 +12,14 @@
 	}
 }
 
+.modal--compact {
+	height: @margin-default * 13;
+}
+
+.modal--tiny {
+	height: @margin-default * 8;
+}
+
 .modal__body {
 	display: flex;
 	justify-content: space-between;
@@ -25,4 +33,48 @@
 	display: flex;
 	flex-grow: 1;
 	margin-bottom: @margin-default;
+}
+
+.modal__radios-list li {
+	width: 50%;
+	margin-left: @margin-half;
+
+	&:first-child {
+		margin-left: 0;
+	}
+}
+
+.modal__control {
+	&~label {
+		display: inline-block;
+		width: 100%;
+		padding: @margin-default / 4 @margin-half;
+		cursor: pointer;
+		background: @white-almost;
+		border-radius: @border-radius;
+		color: @grey;
+
+		&:after {
+			display: inline-block;
+			float: right;
+			content: "●";
+			background: @grey;
+			color: transparent;
+			text-shadow: 0px 1px 2px @grey-light;
+			-webkit-background-clip: text;
+			        background-clip: text;
+		}
+	}
+
+	&:checked~label {
+		background: transparent;
+		color: @black;
+
+		&:after {
+			color: @red;
+			background: transparent;
+			text-shadow: 0 0 3px @red;
+		}
+	}
+
 }

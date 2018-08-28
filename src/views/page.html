@@ -10,19 +10,24 @@
 </main>
 
 <div class="action" data-action>
-	<a href="/pages/{{ page.id }}/edit" class="button button--secondary">Edit page.</a>
-	<a href="/tasks/{{ page.id }}/settings" class="button pull-right" data-trigger-modal>Settings.</a>
+	<a href="/pages/{{ page.id }}/edit" class="button button--primary">Edit page.</a>
+	<a href="/tasks/{{ page.id }}/settings" class="button pull-right" data-trigger-modal>Options.</a>
 </div>
 {% endblock %}
 
 {% block modal %}
-<section class="modal closed" data-modal hidden>
+<section class="modal modal--tiny closed" data-modal hidden>
 	<div class="modal__body">
 		<form method="post" onchange="this.submit()" action="/pages/{{ page.id }}">
 			<input type="hidden" name="_method" value="patch">
 			<input type="hidden" name="_action" value="sticky">
-			<input type="checkbox" name="is_sticky" id="page:{{ page.id }}:sticky" {% if page.is_sticky %}checked{% endif %}>
-			<label for="page:{{ page.id }}:sticky">Sticky</label>
+			<input
+				class="a11y-sr-only modal__control"
+				type="checkbox"
+				name="is_sticky"
+				id="page:{{ page.id }}:sticky"
+				{% if page.is_sticky %}checked{% endif %}>
+			<label for="page:{{ page.id }}:sticky">Sticky page.</label>
 		</form>
 		<form method="post" onsubmit="return confirm('Serious.ly')" action="/pages/{{ page.id }}?redirect=/pages">
 			<input type="hidden" name="_method" value="delete">
