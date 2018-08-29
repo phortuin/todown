@@ -15,6 +15,9 @@ module.exports = (req, res, next) => {
 			if (req.body.content) {
 				page.content = req.body.content
 			}
+			if (req.body.tags) {
+				page.tags = req.body.tags
+			}
 			return page.save()
 		}).then(page => res.redirect(redirectTarget))
 		.catch(next)

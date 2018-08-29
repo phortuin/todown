@@ -20,6 +20,19 @@
 	<div class="modal__body">
 		<form method="post" onchange="this.submit()" action="/pages/{{ page.id }}">
 			<input type="hidden" name="_method" value="patch">
+			<label
+				class="text-input__label"
+				for="tags">Tags</label>
+			<input
+				class="text-input text-input__"
+				type="text"
+				name="tags"
+				id="tags"
+				value="{{ page.tags }}"
+				placeholder="Task tags go here.">
+		</form>
+		<form method="post" onchange="this.submit()" action="/pages/{{ page.id }}">
+			<input type="hidden" name="_method" value="patch">
 			<input type="hidden" name="_action" value="sticky">
 			<input
 				class="a11y-sr-only modal__control"
@@ -29,9 +42,12 @@
 				{% if page.is_sticky %}checked{% endif %}>
 			<label for="page:{{ page.id }}:sticky">Sticky page.</label>
 		</form>
-		<form method="post" onsubmit="return confirm('Serious.ly')" action="/pages/{{ page.id }}?redirect=/pages">
+		<form
+			method="post"
+			onsubmit="return confirm('Serious.ly')"
+			action="/pages/{{ page.id }}?redirect=/pages">
 			<input type="hidden" name="_method" value="delete">
-			<button class="button button--secondary">Delete?</button>
+			<button class="button button--secondary pull-right">Delete?</button>
 		</form>
 	</div>
 </section>
