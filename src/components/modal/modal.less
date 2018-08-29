@@ -13,11 +13,11 @@
 }
 
 .modal--compact {
-	height: @margin-default * 13;
+	height: @margin-default * 14;
 }
 
 .modal--tiny {
-	height: @margin-default * 8;
+	height: @margin-default * 12;
 }
 
 .modal__body {
@@ -48,10 +48,10 @@
 	&~label {
 		display: inline-block;
 		width: 100%;
-		padding: @margin-default / 4 @margin-half;
+		padding: @margin-default / 4 0;
 		cursor: pointer;
-		background: @white-almost;
-		border-radius: @border-radius;
+		border-bottom: 2px solid @grey;
+
 		color: @grey;
 
 		&:after {
@@ -69,6 +69,7 @@
 	&:checked~label {
 		background: transparent;
 		color: @black;
+		border-bottom-color: @black-light;
 
 		&:after {
 			color: @red;
