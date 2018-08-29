@@ -1,0 +1,14 @@
+{% from "components/task/task.html" import task %}
+
+{% macro taskList(tasks, redirect) %}
+<section>
+	<form method="post" action="/tasks?redirect={{ redirect }}" id="tasks" data-task-form>
+		<input type="hidden" name="_method" value="PATCH">
+		<ul class="tasks flat-list">
+		{% for taskItem in tasks %}
+			{{ task(taskItem) }}
+		{% endfor %}
+		</ul>
+	</form>
+</section>
+{% endmacro %}

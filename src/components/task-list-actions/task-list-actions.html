@@ -1,0 +1,11 @@
+{% from "components/task-bulk-actions/task-bulk-actions.html" import taskBulkActions %}
+
+{% macro taskListActions(secondary = { value: 'today', label: 'Do today.' }) %}
+<div
+	class="action-bar" data-action>
+	<div id="action-default">
+		<a class="button" data-trigger-modal href="/create">Add task</a>
+	</div>
+	{{ taskBulkActions(secondary) }}
+</div>
+{% endmacro %}

@@ -1,0 +1,6 @@
+{% macro taskBulkActions(secondary) %}
+<div id="action-bulk" hidden>
+	<button class="button button--primary" type="submit" name="_action" value="done" form="tasks">Done.</button>
+	<button class="button" type="submit" name="_action" value="{{ secondary.value }}" form="tasks">{{ secondary.label }}</button>
+</div>
+{% endmacro %}

@@ -1,5 +1,7 @@
 {% extends "views/_base.html" %}
 {% from "components/header/header.html" import header %}
+{% from "components/page-actions/page-actions.html" import pageActions %}
+{% from "components/task-list/task-list.html" import taskList %}
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
@@ -7,12 +9,16 @@
 	<section class="content page__content">
 		{{ page.content | markdown | safe }}
 	</section>
+	{% if tasks.length %}
+	<h2>Related tasks &darr;</h2>
+	{{ taskList(tasks, '/pages/' + page.id) }}
+	{% endif %}
 </main>
-
-<div class="action" data-action>
-	<a href="/pages/{{ page.id }}/edit" class="button button--primary">Edit page.</a>
-	<a href="/tasks/{{ page.id }}/settings" class="button pull-right" data-trigger-modal>Options.</a>
-</div>
+{% if evening %}
+	{{ pageActions(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
+{% else %}
+	{{ pageActions() }}
+{% endif %}
 {% endblock %}
 
 {% block modal %}

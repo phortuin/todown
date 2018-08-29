@@ -1,5 +1,5 @@
 {% extends "views/_base.html" %}
-{% from "components/action/action.html" import action %}
+{% from "components/task-list-actions/task-list-actions.html" import taskListActions %}
 {% from "components/header/header.html" import header %}
 {% from "components/new-item-modal/new-item-modal.html" import newItemModal %}
 {% from "components/task/task.html" import task %}
@@ -19,7 +19,7 @@
 		</form>
 	</section>
 </main>
-{{ action(secondary = { value: 'clear_date', label: 'Not tomorrow.' }) }}
+{{ taskListActions(secondary = { value: 'clear_date', label: 'Not tomorrow.' }) }}
 {% endblock %}
 
 {% block modal %}

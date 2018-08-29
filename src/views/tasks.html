@@ -1,8 +1,8 @@
 {% extends "views/_base.html" %}
-{% from "components/action/action.html" import action %}
+{% from "components/task-list-actions/task-list-actions.html" import taskListActions %}
 {% from "components/header/header.html" import header %}
 {% from "components/new-item-modal/new-item-modal.html" import newItemModal %}
-{% from "components/task/task.html" import task %}
+{% from "components/task-list/task-list.html" import taskList %}
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
@@ -11,21 +11,12 @@
 	{% else %}
 		{{ header(query or 'Everything', section = { name: 'Tasks', url: '/tasks' }) }}
 	{% endif %}
-	<section>
-		<form method="post" action="/tasks?redirect=/tasks" id="tasks" data-task-form>
-			<input type="hidden" name="_method" value="PATCH">
-			<ul class="tasks flat-list">
-			{% for taskItem in tasks %}
-				{{ task(taskItem) }}
-			{% endfor %}
-			</ul>
-		</form>
-	</section>
+	{{ taskList(tasks, '/tasks') }}
 </main>
 {% if evening %}
-	{{ action(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
+	{{ taskListActions(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
 {% else %}
-	{{ action() }}
+	{{ taskListActions() }}
 {% endif %}
 {% endblock %}
 
