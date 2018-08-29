@@ -15,9 +15,9 @@
 	{% endif %}
 </main>
 {% if evening %}
-	{{ pageActions(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
+	{{ pageActions(page, secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
 {% else %}
-	{{ pageActions() }}
+	{{ pageActions(page) }}
 {% endif %}
 {% endblock %}
 
