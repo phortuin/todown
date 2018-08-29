@@ -21,8 +21,14 @@ app.use(require('@lib/parse-method')) // Parses _method parameters to req.method
 // is it possible to exclude it from cache? also, if this snippet goes into
 // a separate module, it will probably be cached as well. Leave it in for now
 app.use('*', (req, res, next) => {
-	renderer.addGlobal('evening', moment().isAfter(moment({ hour: 20 })))
-	return next()
+	require('@models/page').find({ is_sticky: true }).exec()
+		.then(pages => {
+			renderer.addGlobal('stickyPages', pages)
+		})
+		.finally(() => {
+			renderer.addGlobal('evening', moment().isAfter(moment({ hour: 20 })))
+			next()
+		})
 })
 app.get('/', (req, res) => res.redirect('/today'))
 app.use('/today', require('@routes/today'))

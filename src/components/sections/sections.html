@@ -21,6 +21,14 @@
 		<li>
 			<a class="sections__link" href="/action">Action</a>
 		</li>
+		{% if stickyPages %}
+		<li class="divider"></li>
+		{% for page in stickyPages %}
+		<li>
+			<a class="sections__link" href="/pages/{{ page.id }}">{{ page.title }}</a>
+		</li>
+		{% endfor %}
+		{% endif %}
 		<li class="divider"></li>
 		<li>
 			<form method="get" action="/tasks">
