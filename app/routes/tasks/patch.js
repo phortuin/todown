@@ -7,6 +7,9 @@ module.exports = (req, res, next) => {
 		.then(task => {
 			redirectTarget = `/tasks/${task.id}`
 			if (req.body.is_done) {
+				if (task.is_today) {
+					redirectTarget = '/today'
+				}
 				task.setDone()
 			}
 			if (req.body._action === 'done' && !req.body.is_done) {
