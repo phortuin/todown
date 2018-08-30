@@ -34,11 +34,13 @@ TaskSchema.methods.setDone = function() {
 
 TaskSchema.methods.setToday = function() {
 	this.scheduled_date = moment().startOf('day')
+	this.is_done = false
 	this.is_actionable = true
 }
 
 TaskSchema.methods.setTomorrow = function() {
 	this.scheduled_date = moment().add(1, 'd').startOf('day')
+	this.is_done = false
 	this.is_actionable = true
 }
 
