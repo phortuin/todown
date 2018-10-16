@@ -14,7 +14,6 @@
 	const modal = document.querySelector('[data-modal]')
 	const taskDeleters = toArray(document.querySelectorAll('[data-delete-task]'))
 	const editTaskLink = document.querySelector('[data-edit-task]')
-	const autofocusTextareas = toArray(document.querySelectorAll('textarea[autofocus]'))
 
 	// helpers
 
@@ -84,17 +83,7 @@
 		let textarea = modal.querySelector('textarea')
 		if (textarea) {
 			textarea.focus()
-			moveCursorToEnd(textarea)
 		}
-	}
-
-	function moveCursorToEnd(textarea) {
-		if (textarea instanceof Event) {
-			textarea = textarea.currentTarget
-		}
-		let length = textarea.value.length
-		textarea.setSelectionRange(length, length)
-		textarea.scrollTop = 99999
 	}
 
 	// handlers
@@ -104,7 +93,6 @@
 	modalClosers.forEach(modalCloser => modalCloser.addEventListener('click', closeModal))
 	modalOpeners.forEach(modalOpener => modalOpener.addEventListener('click', openModal))
 	sidebarOpeners.forEach(sidebarOpener => sidebarOpener.addEventListener('click', openSidebar))
-	autofocusTextareas.forEach(textarea => textarea.addEventListener('focus', moveCursorToEnd))
 	taskDeleters.forEach(taskDeleter => taskDeleter.addEventListener('click', event => {
 		preventNavigationClick(event)
 		const id = event.currentTarget.id
