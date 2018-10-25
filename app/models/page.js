@@ -8,7 +8,7 @@ const PageSchema = new mongoose.Schema({
 	tags: String,
 	tasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }],
 	parent: { type: Schema.Types.ObjectId, ref: 'Page' },
-	is_sticky: false
+	is_sticky: { type: Boolean } // note: this does not fix sorting, as a page is saved without setting is_sticky. underwater, it's still undefined
 });
 
 PageSchema.virtual('pages', {
