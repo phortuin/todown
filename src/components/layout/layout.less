@@ -1,8 +1,10 @@
 main {
 	width: 100%;
-	padding: @header-height @margin-default 0; // compensate for fixed header
+	padding: calc(env(safe-area-inset-top) + @header-height + @margin-half) @margin-default 0; // compensate for fixed header
 	transition: filter 100ms ease-out, transform 200ms ease-out;
 	transform-origin: top center;
+	background: @white;
+	min-height: 100vh;
 
 	&.blocked {
 		user-select: none;
@@ -11,6 +13,7 @@ main {
 	}
 
 	&.main--is-review {
+		max-width: 40rem;
 		padding-top: 0;
 		transition: none;
 		transform-origin: initial;
@@ -20,8 +23,10 @@ main {
 		padding-bottom: @margin-default * 5;
 	}
 
-	@media @l {
-		max-width: 40rem;
+	@media @m {
+		padding: calc(env(safe-area-inset-top) + (1.25 * @header-height)  + @margin-half) @margin-default * 2 0;
+		margin-left: @sidebar-width;
+		max-width: 100vw - @sidebar-width;
 	}
 }
 
@@ -41,10 +46,6 @@ main {
 			margin-left: 0;
 		}
 	}
-}
-
-.pull-right {
-	float: right;
 }
 
 .ui-link {

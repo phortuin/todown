@@ -3,10 +3,16 @@
 	width: 100%;
 	top: 0;
 	left: 0;
-	padding: 3/4 * @margin-default @margin-default;
-	height: @header-height;
-	background: @white;
+	padding: calc(env(safe-area-inset-top) + (3/4 * @margin-default)) @margin-default;
+	height: calc(env(safe-area-inset-top) + @header-height);
+	background: @blue;
 	z-index: @z-index-high; // make review item transitions & absolute checkboxes go under header
+
+	@media @m {
+		background: @white;
+		left: @sidebar-width;
+		padding: @margin-default @margin-default * 2;
+	}
 }
 
 .header--review {

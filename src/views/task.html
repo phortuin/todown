@@ -18,7 +18,7 @@
 <div
 	class="action-bar" data-action>
 	<a href="/tasks/{{ task.id }}/edit" class="button button--primary">Edit.</a>
-	<a href="/tasks/{{ task.id }}/settings" class="button pull-right" data-trigger-modal>Options.</a>
+	<a href="/tasks/{{ task.id }}/settings" class="button button--options" data-trigger-modal>Options.</a>
 </div>
 {% endblock %}
 
@@ -82,12 +82,11 @@
 		</form>
 		<div>
 			<form
-				class="pull-right"
 				method="post"
 				onsubmit="return confirm('Serious.ly')"
 				action="/tasks/{{ task.id }}?redirect=/tasks">
 				<input type="hidden" name="_method" value="delete">
-				<button class="button button--secondary">Delete?</button>
+				<button class="button button--secondary button--delete">Delete?</button>
 			</form>
 			<form method="post" onchange="this.submit()" action="/tasks/{{ task.id }}">
 				<input type="hidden" name="_method" value="patch">

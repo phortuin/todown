@@ -1,6 +1,6 @@
 .text-input {
 	width: 100%;
-	padding: @margin-half;
+	padding: @margin-half @margin-default;
 	font-size: 1em;
 	border: 2px solid @black-light;
 	outline: none;
@@ -12,15 +12,25 @@
 }
 
 .text-input--colorful {
-	border: 0;
-	background: rgba(0, 0, 0, 0.1);
-	box-shadow: inset 0 0.0625em 0.75em rgba(0, 0, 0, 0.5);
+	border: 1.5px solid @white-almost;
+	background: transparent;
 	color: @white;
 	font-weight: @font-weight-m;
 	-webkit-font-smoothing: antialiased;
 
 	&::placeholder {
 		color: @white;
+
+		@media @m {
+			color: @black;
+		}
+	}
+
+	@media @m {
+		border: 2px solid @black;
+		-webkit-font-smoothing: subpixel-antialiased;
+		font-weight: normal;
+		color: @black;
 	}
 }
 

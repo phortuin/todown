@@ -5,14 +5,34 @@
 	left: 0;
 	top: 0;
 	transition: all 150ms cubic-bezier(0, 0.5, 0, 1);
-	background: linear-gradient(@blue, @red);
+	background: @blue;
 	z-index: @z-index-highest; // side menu trumps all
 
 	a {
 		color: @white;
 	}
+
+	@media @m {
+		width: @sidebar-width;
+		background: @white-almost;
+		font-size: 0.875em; // counter blowup of root em
+
+		a {
+			color: @black;
+		}
+	}
 }
 
 .sidemenu.closed {
 	transform: translateX(-100vw);
+
+	@media @m {
+		transform: none;
+	}
+}
+
+@media @m {
+	.sidemenu[hidden] {
+		display: block;
+	}
 }

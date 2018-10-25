@@ -7,17 +7,30 @@
 	transition: all 200ms cubic-bezier(0.3, 0.25, 0, 1);
 	z-index: @z-index-high; // go over .overlay
 
+	@media @m {
+		opacity: 1;
+		width: 50vw;
+		left: 35vw;
+		top: 65vh;
+		outline: @margin-default solid @white;
+	}
+
 	&.closed {
 		transform: translateY(100%);
+
+		@media @m {
+			transform: translateY(15vh);
+			opacity: 0;
+		}
 	}
 }
 
 .modal--compact {
-	height: @margin-default * 14;
+	height: 11em;
 }
 
 .modal--tiny {
-	height: @margin-default * 12;
+	height: 9.5em;
 }
 
 .modal__body {

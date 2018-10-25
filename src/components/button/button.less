@@ -1,6 +1,6 @@
 .button {
 	display: inline-block;
-	border: 2px solid @black;
+	border: 0.125em solid @black;
 	border-radius: @border-radius;
 	padding: @margin-half @margin-default;
 	text-decoration: none;
@@ -31,4 +31,15 @@
 	border-color: @red;
 	background: @red;
 	color: @white;
+}
+
+.button--options,
+.button--delete {
+	float: right;
+}
+
+.button--options {
+	@media @m {
+		float: none;
+	}
 }

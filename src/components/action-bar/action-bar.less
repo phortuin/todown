@@ -11,4 +11,10 @@
 	&.closed {
 		transform: translateY(100%);
 	}
+
+	@media @m {
+		left: @sidebar-width;
+		padding: @margin-default @margin-default * 2;
+		background: @white;
+	}
 }

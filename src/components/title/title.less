@@ -2,16 +2,31 @@
 	margin: 0;
 	font-size: 1em;
 	font-weight: @font-weight-m;
+	color: @white;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+
+	@media @m {
+		color: @black;
+		-webkit-font-smoothing: subpixel-antialiased;
+	}
 }
 
 .title__header {
 	text-decoration: none;
-	color: @black;
+	color: @white;
+
+	@media @m {
+		color: @black;
+	}
 }
 
 .title__menu-opener {
 	margin-right: @margin-half;
+
+	@media @m {
+		display: none;
+	}
 }

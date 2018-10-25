@@ -48,6 +48,10 @@
 	border-radius: @border-radius;
 	align-items: center;
 	margin-right: -@margin-default / 3;
+
+	@media @m {
+		margin-right: 0;
+	}
 }
 
 .task__content--done {
@@ -58,7 +62,7 @@
 
 	input[type=checkbox]~label {
 		cursor: pointer;
-		margin-left: 1.75rem;
+		margin-left: 1.25em;
 	}
 
 	input[type=checkbox]~label:before {
@@ -68,7 +72,7 @@
 		height: 0.675em;
 		position: absolute;
 		margin-top: 0.25em;
-		margin-left: -1.75rem;
+		margin-left: -1.25em;
 		border-radius: 0.125em;
 		border: 0.0875em solid @black;
 	}
@@ -93,8 +97,16 @@
 	input[type=checkbox]:checked:disabled~label:before {
 		background-color: #999;
 	}
+
 	input[type=checkbox]:disabled~label {
 		color: #999;
+	}
+
+	@media @m {
+		&:hover {
+			background: @white-almost;
+			outline: 0.25em solid @white-almost;
+		}
 	}
 
 }
