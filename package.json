@@ -75,6 +75,7 @@
   "devDependencies": {
     "ava": "0.25.0",
     "chokidar-cli": "1.2.0",
-    "nodemon": "1.17.5"
+    "nodemon": "1.17.5",
+    "now": "^12.1.3"
   }
 }
