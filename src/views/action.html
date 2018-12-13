@@ -17,7 +17,7 @@
 						placeholder="(Will be deleted)"
 						class="textarea textarea--action">{{ task.content }}</textarea>
 				</div>
-				{{ reviewActionBar(task.id, nextTaskId, ['delete', 'next']) }}
+				{{ reviewActionBar(task.id, nextTaskId, ['delete', 'actionable', 'next']) }}
 			</li>
 		{% endfor %}
 			<li id="task:submit">

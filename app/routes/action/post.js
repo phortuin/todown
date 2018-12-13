@@ -7,6 +7,11 @@ module.exports = (req, res, next) => {
 			if (req.body[`${task.id}-delete`] === 'on') {
 				return task.remove()
 			}
+			if (req.body[`${task.id}-actionable`] === 'on') {
+				task.content = taskContent
+				task.is_actionable = true
+				return task.save()
+			}
 			if (taskContent !== undefined && taskContent !== task.content) {
 				if (taskContent === '') {
 					return task.remove()
