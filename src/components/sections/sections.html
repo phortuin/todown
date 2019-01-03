@@ -2,6 +2,9 @@
 <section class="sections">
 	<ul class="flat-list sections__list">
 		<li>
+			<a class="sections__link" data-last>Switch to last ⇄</a>
+		</li>
+		<li>
 			<a class="sections__link" href="/today">Today</a>
 		</li>
 		{% if evening %}
@@ -10,10 +13,7 @@
 		</li>
 		{% endif %}
 		<li>
-			<a class="sections__link" href="/tasks">Tasks</a>
-		</li>
-		<li>
-			<a class="sections__link" href="/pages">Pages</a>
+			<a class="sections__link" href="/tasks">All tasks</a>
 		</li>
 		<li>
 			<a class="sections__link" href="/review">Review</a>
@@ -21,8 +21,11 @@
 		<li>
 			<a class="sections__link" href="/action">Action</a>
 		</li>
-		{% if stickyPages %}
 		<li class="divider"></li>
+		<li>
+			<a class="sections__link" href="/pages">Pages</a>
+		</li>
+		{% if stickyPages %}
 		{% for page in stickyPages %}
 		<li>
 			<a class="sections__link" href="/pages/{{ page.id }}">{{ page.title }}</a>

@@ -14,6 +14,7 @@
 	const modal = document.querySelector('[data-modal]')
 	const taskDeleters = toArray(document.querySelectorAll('[data-delete-task]'))
 	const editTaskLink = document.querySelector('[data-edit-task]')
+	const lastLink = document.querySelector('[data-last]')
 
 	// helpers
 
@@ -99,6 +100,7 @@
 		const targetId = id.replace(/delete/, 'content')
 		document.getElementById(targetId).value = ''
 	}))
+	lastLink.setAttribute('href', window.sessionStorage.last_url)
 
 	if (editTaskLink) {
 		editTaskLink.addEventListener('click', event => {
@@ -153,5 +155,9 @@
 				}, 100)
 			})
 		})
+	}
+
+	if (!!window.location.href.match(/(pages\/|tasks\/)/g)) {
+		window.sessionStorage.setItem('last_url', window.location.pathname)
 	}
 }
