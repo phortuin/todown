@@ -13,6 +13,8 @@ const TaskSchema = new mongoose.Schema({
 	bumps: 0
 });
 
+TaskSchema.set('toJSON', { virtuals: true })
+
 // Add a text index on content, so we can search it
 // Source: https://stackoverflow.com/questions/28775051/best-way-to-perform-a-full-text-search-in-mongodb-and-mongoose
 TaskSchema.index({ content: 'text' });
