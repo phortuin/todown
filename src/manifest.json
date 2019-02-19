@@ -1,7 +1,7 @@
 {
   "name": "Todown",
   "short_name": "Todown",
-  "theme_color": "#fe4365",
+  "theme_color": "#4a49eb",
   "background_color": "#fe4365",
   "display": "standalone",
   "orientation": "portrait",
