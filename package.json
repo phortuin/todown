@@ -40,13 +40,6 @@
   "ava": {
     "require": "module-alias/register"
   },
-  "now": {
-    "alias": "todown",
-    "dotenv": ".env.production",
-    "regions": [
-      "bru"
-    ]
-  },
   "_moduleAliases": {
     "@lib": "lib",
     "@routes": "app/routes",

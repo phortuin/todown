@@ -26,3 +26,6 @@ static
 
 # (commercial) fonts
 src/assets/fonts
+
+# now config
+now.json
