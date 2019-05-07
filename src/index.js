@@ -13,7 +13,6 @@
 	const reviewTaskInputs = toArray(document.querySelectorAll('[data-review-list] input, [data-review-list] [data-skip]'))
 	const modal = document.querySelector('[data-modal]')
 	const taskDeleters = toArray(document.querySelectorAll('[data-delete-task]'))
-	const editTaskLink = document.querySelector('[data-edit-task]')
 	const lastLink = document.querySelector('[data-last]')
 
 	// helpers
@@ -101,15 +100,6 @@
 		document.getElementById(targetId).value = ''
 	}))
 	lastLink.setAttribute('href', window.sessionStorage.last_url)
-
-	if (editTaskLink) {
-		editTaskLink.addEventListener('click', event => {
-			if (event.currentTarget.tagName !== 'A') {
-				let id = event.currentTarget.dataset.editTask
-				window.location.href = `/tasks/${id}/edit`
-			}
-		})
-	}
 
 	if (taskForm) {
 		const taskFormInputs = toArray(taskForm.elements)
