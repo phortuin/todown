@@ -7,10 +7,7 @@ const TaskSchema = new mongoose.Schema({
 	content: String,
 	is_done: false,
 	is_actionable: false,
-	is_starred: false,
-	is_quick: false,
 	scheduled_date: Date,
-	bumps: 0
 });
 
 TaskSchema.set('toJSON', { virtuals: true })
