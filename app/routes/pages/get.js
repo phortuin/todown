@@ -5,11 +5,8 @@ const getTaskList = require('@routes/tasks/list').getTaskList
 
 function getTaggedTasks(page) {
 	if (page.tags) {
-		return new Promise((resolve, reject) => {
-			getTaskList({ $text: { $search: page.tags }, is_done: { $ne: true }})
-				.then(tasks => resolve({ page, tasks }))
-				.catch(reject)
-		})
+		return getTaskList({ $text: { $search: page.tags }, is_done: { $ne: true }})
+			.then(tasks => ({ page, tasks }))
 	} else {
 		return Promise.resolve({ page, tasks: [] })
 	}
