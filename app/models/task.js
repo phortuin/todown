@@ -18,6 +18,11 @@ TaskSchema.index({ content: 'text' })
 TaskSchema.virtual('title').get(getTitleFromMarkdown)
 TaskSchema.virtual('scheduled_hr').get(getScheduledHumanReadable)
 TaskSchema.virtual('is_today').get(getIsToday)
+TaskSchema.virtual('subtasks', {
+	ref: 'Subtask',
+	localField: '_id',
+	foreignField: 'taskId',
+})
 
 TaskSchema.methods.setDone = function() {
 	this.is_done = true
