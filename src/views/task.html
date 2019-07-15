@@ -12,6 +12,54 @@
 		class="content task__content{% if task.is_done %} task__content--done{% endif %}">
 			{{ task.content | markdown | safe }}
 	</section>
+	<h2 class="task__checklist" id="checklist">
+		Checklist
+		<a class="button button--primary" href="#create-subtask" data-show-subtask-form="create-subtask">Add.</a>
+	</h2>
+	{% if task.subtasks.length %}
+	<ul class="tasks flat-list subtasks">
+	{% for subtask in task.subtasks %}
+	<li class="task subtask {% if subtask.is_done %}task--done subtask--done{% endif %}">
+		<form
+			method="post"
+			action="/subtasks/{{ subtask.id }}"
+			id="subtask:{{ subtask.id }}">
+			<input
+				type="hidden"
+				name="_method"
+				value="patch">
+			<input
+				class="a11y-sr-only"
+				type="checkbox"
+				id="subtask:{{ subtask.id }}:is_done"
+				name="is_done"
+				{% if subtask.is_done %}checked="checked"{% endif %}
+				onchange="this.form.submit()">
+			<label
+				class="task__label"
+				for="subtask:{{ subtask.id }}:is_done">
+				<span class="task__title">{% if subtask.content %}{{ subtask.content | titleize | safe }}{% else %}(Untitled){% endif %}</span>
+			</label>
+		</form>
+	</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+	<form
+		action="/subtasks"
+		method="post"
+		id="create-subtask">
+		<input
+			type="hidden"
+			name="task_id"
+			value="{{ task.id }}">
+		<input
+			type="text"
+			class="text-input"
+			name="content"
+			id="subtask">
+	</form>
+	<button class="a11y-sr-only" form="create-subtask">Create subtask</button>
 </main>
 
 <div
@@ -50,6 +98,17 @@
 					<label for="task:{{ task.id }}:tomorrow">Tomorrow.</label>
 				</li>
 			</ul>
+		</form>
+		<form
+			method="post"
+			onchange="this.submit()"
+			action="/tasks/{{ task.id }}">
+			<input type="hidden" name="_method" value="patch">
+			<input
+				class="text-input"
+				type="date"
+				value="{{ task.scheduled_input }}"
+				name="scheduled_date">
 		</form>
 		<form
 			method="post"

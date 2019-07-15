@@ -6,24 +6,20 @@
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
-	{{ header('Today') }}
+	{{ header('Scheduled') }}
 	<section
 		class="task-list">
-		<form method="post" action="/tasks?redirect=/today" id="tasks" data-task-form>
+		<form method="post" action="/tasks?redirect=/inbox" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">
 			<ul class="tasks flat-list">
 			{% for taskItem in tasks %}
-				{{ task(taskItem, show_date = false) }}
+				{{ task(taskItem, true) }}
 			{% endfor %}
 			</ul>
 		</form>
 	</section>
 </main>
-{% if evening %}
-	{{ taskListActions(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
-{% else %}
-	{{ taskListActions(secondary = { value: 'clear_date', label: 'Not today.' }) }}
-{% endif %}
+{{ taskListActions() }}
 {% endblock %}
 
 {% block modal %}

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const moment = require('moment')
-const { getTitleFromMarkdown, getScheduledHumanReadable, getIsToday } = require('../helpers')
+const { getTitleFromMarkdown, getScheduledHumanReadable, getScheduledForInput, getIsToday, getIsTomorrow, getNumSubtasksDone } = require('../helpers')
 mongoose.Promise = require('bluebird')
 
 const TaskSchema = new mongoose.Schema({
@@ -17,12 +17,15 @@ TaskSchema.set('toJSON', { virtuals: true })
 TaskSchema.index({ content: 'text' })
 TaskSchema.virtual('title').get(getTitleFromMarkdown)
 TaskSchema.virtual('scheduled_hr').get(getScheduledHumanReadable)
+TaskSchema.virtual('scheduled_input').get(getScheduledForInput)
 TaskSchema.virtual('is_today').get(getIsToday)
+TaskSchema.virtual('is_tomorrow').get(getIsTomorrow)
 TaskSchema.virtual('subtasks', {
 	ref: 'Subtask',
 	localField: '_id',
 	foreignField: 'taskId',
 })
+TaskSchema.virtual('num_subtasks_done').get(getNumSubtasksDone)
 
 TaskSchema.methods.setDone = function() {
 	this.is_done = true

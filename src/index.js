@@ -13,6 +13,7 @@
 	const reviewTaskInputs = toArray(document.querySelectorAll('[data-review-list] input, [data-review-list] [data-skip]'))
 	const modal = document.querySelector('[data-modal]')
 	const taskDeleters = toArray(document.querySelectorAll('[data-delete-task]'))
+	const subtaskFormOpeners = toArray(document.querySelectorAll('[data-show-subtask-form]'))
 
 	// helpers
 
@@ -98,6 +99,15 @@
 		const targetId = id.replace(/delete/, 'content')
 		document.getElementById(targetId).value = ''
 	}))
+	subtaskFormOpeners.forEach(subtaskFormOpener => subtaskFormOpener.addEventListener('click', showSubtaskForm))
+
+	function showSubtaskForm(event) {
+		preventNavigationClick(event)
+		let targetId = event.currentTarget.dataset.showSubtaskForm;
+		let formEl = document.getElementById(targetId)
+		formEl.style.display = 'block';
+		formEl.querySelector('input[type=text]').focus();
+	}
 
 	if (taskForm) {
 		const taskFormInputs = toArray(taskForm.elements)

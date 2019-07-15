@@ -29,10 +29,11 @@ module.exports = (req, res, next) => {
 						break
 					case 'tomorrow':
 						task.setTomorrow()
-						redirectTarget = '/tomorrow'
+						redirectTarget = '/scheduled'
 						break
 					default:
-						task.scheduled_date = null
+						task.scheduled_date = moment(req.body.scheduled_date)
+						redirectTarget = '/scheduled'
 						break
 				}
 			}

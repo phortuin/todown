@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
 			}
 			if (req.body[`${task.id}-tomorrow`] === 'on') {
 				task.setTomorrow()
-				redirectTarget = '/tomorrow'
+				redirectTarget = '/scheduled'
 				return task.save()
 			}
 			return task

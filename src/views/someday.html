@@ -6,10 +6,10 @@
 
 {% block content %}
 <main class="main--has-action-bar" role="main">
-	{{ header('Tomorrow') }}
+	{{ header('Someday') }}
 	<section
 		class="task-list">
-		<form method="post" action="/tasks?redirect=/tomorrow" id="tasks" data-task-form>
+		<form method="post" action="/tasks?redirect=/someday" id="tasks" data-task-form>
 			<input type="hidden" name="_method" value="PATCH">
 			<ul class="tasks flat-list">
 			{% for taskItem in tasks %}
@@ -19,7 +19,11 @@
 		</form>
 	</section>
 </main>
-{{ taskListActions(secondary = { value: 'clear_date', label: 'Not tomorrow.' }) }}
+{% if evening %}
+	{{ taskListActions(secondary = { value: 'tomorrow', label: 'Do tomorrow.' }) }}
+{% else %}
+	{{ taskListActions() }}
+{% endif %}
 {% endblock %}
 
 {% block modal %}
